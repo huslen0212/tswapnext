@@ -1,63 +1,104 @@
 .header {
-    display: flex;
-    justify-content: space-between;
-    align-items: center;
-    background: #fff;
-    padding: 0 30px;
-    box-shadow: 0 2px 4px #202279;
-    border-bottom: #202279;
-  }
-  
-  .headerButtons {
-    display: flex;
-    align-items: center;
-    gap: 25px;
-  }
-  
-  .menuToggle {
-    display: none;
-    background: none;
-    border: none;
-    font-size: 24px;
-    cursor: pointer;
-  }
-  
-  .menu {
-    display: flex;
-    gap: 20px;
-  }
-  
-  .dropdown {
-    position: relative;
-  }
-  
-  .dropdownContent {
-    display: none;
-    position: absolute;
-    background-color: #f1f1f1;
-    min-width: 160px;
-    box-shadow: 0px 8px 16px rgba(0,0,0,0.2);
-    z-index: 1;
-  }
-  
-  .dropbtn {
-    background: none;
-    border: none;
-    color: #202279;
-    font-size: 16px;
-    cursor: pointer;
-  }
-  
-  .dropdown:hover .dropdownContent {
-    display: block;
-  }
-  
-  .balance, .loginBtn {
-    background: #202279;
-    color: #fff;
-    border: none;
-    padding: 10px 15px;
-    cursor: pointer;
-    border-radius: 5px;
-  }
-  
+  display: flex;
+  justify-content: space-between;
+  align-items: center;
+  background: #fff;
+  padding: 0 30px;
+  box-shadow: 0 2px 4px #202279;
+}
+
+.headerButtons {
+  display: flex;
+  align-items: center;
+  gap: 25px;
+}
+
+.menu {
+  display: flex;
+  gap: 20px;
+}
+
+.showMenu {
+  display: block;
+}
+
+.navList {
+  list-style: none;
+  display: flex;
+  align-items: center;
+  gap: 20px;
+}
+
+.navLink {
+  text-decoration: none;
+  color: #202279;
+  font-size: 16px;
+}
+
+.dropdown {
+  position: relative;
+}
+
+.dropdown a:hover {color: rgb(255, 112, 34);}
+
+.dropbtn {
+  background: none;
+  border: none;
+  font-size: 16px;
+  color: #202279;
+  cursor: pointer;
+  padding: 0;
+  display: flex;
+  align-items: center;
+}
+
+.dropdownContent {
+  display: none;
+  position: absolute;
+  left: 0;
+  top: 100%;
+  background-color: #f1f1f1;
+  min-width: 200px;
+  box-shadow: 0px 8px 16px rgba(0, 0, 0, 0.2);
+  border-radius: 5px;
+  z-index: 1;
+  padding: 5px 0;
+}
+
+.dropdownContent li {
+  list-style: none;
+}
+
+.dropdownContent a {
+  color: black;
+  padding: 10px 16px;
+  text-decoration: none;
+  display: block;
+  font-size: 14px;
+}
+
+.dropdown:hover .dropdownContent,
+.show {
+  display: block;
+}
+
+.balance, .loginBtn {
+  background: #202279;
+  color: #fff;
+  border: none;
+  padding: 10px 20px;
+  cursor: pointer;
+  border-radius: 5px;
+  display: flex;
+  align-items: center;
+  justify-content: center;
+  gap: 5px;
+  font-size: 16px;
+  height: 40px;
+  min-width: 100px;
+}
+
+.balance img, .loginBtn img {
+  width: 17px;
+  height: 17px;
+}
