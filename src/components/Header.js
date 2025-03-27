@@ -18,7 +18,7 @@ const Header = () => {
   return (
     <header className={styles.header}>
       <Link href="/">
-        <Image src="/photos/logo.png" alt="T Swap" height={130} width={130} />
+        <Image src="/photos/logo.png" alt="T Swap" height={130} width={150} />
       </Link>
       <div className={styles.headerButtons}>
         <div className={`${styles.menu} ${menuOpen ? styles.showMenu : ""}`}>

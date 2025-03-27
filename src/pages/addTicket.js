@@ -6,7 +6,7 @@ export default function Home() {
     <div className="pageContainer">
       <Header />
       <div className="content">
-        nuur
+       zarah tasalbar nemeh
       </div>
       <Footer />
     </div>
