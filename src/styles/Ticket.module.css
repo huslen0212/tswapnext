@@ -1,0 +1,32 @@
+.ticket-list {
+    display: flex;
+    justify-content: center;
+    gap: 50px;
+    flex-wrap: wrap;
+  }
+  
+  .ticket {
+    background: #fff;
+    padding: 15px;
+    border-radius: 10px;
+    box-shadow: 0 2px 4px #202279;
+    text-align: center;
+    width: 380px;
+    cursor: pointer;
+  }
+  
+  .ticket img {
+    width: 100%;
+    border-radius: 10px;
+  }
+  .ticket-list a {
+    text-decoration: none;
+  }
+  
+  .ticket-list a:visited {
+    color: inherit;
+  }
+  
+  .ticket p{
+    color: #808080;
+  }
