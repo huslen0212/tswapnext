@@ -1,7 +1,7 @@
 import Image from 'next/image';
 import styles from '../styles/SavedTicket.module.css';
 
-export default function SavedTicket() {
+export default function SavedTicket({ onDelete }) {
   return (
     <div className={styles.ticketContainer}>
       <Image 
@@ -23,7 +23,7 @@ export default function SavedTicket() {
           <textarea readOnly defaultValue="PlayTime-ийн тасалбар 7 сарын 14, 15, 16-ны тасалбар зарна шүү. Үнэ тохирч болно." />
         </div>
 
-        <button className={styles.deleteButton}>Хасах</button>
+        <button className={styles.deleteButton} onClick={onDelete}>Хасах</button>
       </div>
     </div>
   );
