@@ -1,7 +1,7 @@
 .searchContainer {
   display: flex;
-  justify-content: center; /* Төвд байрлуулах */
-  align-items: center; /* Босоо төвлөрүүлэх */
+  justify-content: center;
+  align-items: center;
   margin: 20px 0;
   position: relative;
   width: 100%;
@@ -9,7 +9,7 @@
   
 .searchContainer input {
   padding: 10px;
-  width: 500px; /* Хайлт өргөн */
+  width: 500px;
   border: 1px solid #d7d7d7;
   border-radius: 12px;
   text-align: left;
@@ -35,10 +35,10 @@
 
 .categories {
   display: flex;
-  justify-content: center; /* Төвд байрлуулах */
+  justify-content: center;
   align-items: center;
-  flex-wrap: wrap; /* Хэрэв дэлгэц багасвал шинэ мөр рүү шилжинэ */
-  gap: 10px; /* Завсар нэмэх */
+  flex-wrap: wrap;
+  gap: 10px;
   margin: 20px 0;
 }
   
@@ -63,8 +63,8 @@
 
 .headingContainer {
     display: flex;
-    justify-content: center; /* Хэвтээ төвлөрүүлэх */
-    align-items: center; /* Босоо төвлөрүүлэх */
+    justify-content: center;
+    align-items: center;
     width: 100%;
    
 }
