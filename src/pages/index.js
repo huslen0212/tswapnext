@@ -3,6 +3,8 @@ import Header from '@/components/Header';
 import Image from 'next/image';
 import styles from '../styles/IndexPage.module.css';
 import Ticket from '@/components/Ticket';
+import Link from 'next/link';
+
 export default function Home() {
   return (
     <div className="pageContainer">
@@ -28,9 +30,12 @@ export default function Home() {
           <h1>Таньд санал болгох тасалбар</h1>
         </div>
         
+        <Link href = "/ticketInfo">
         <div className={styles.ticketContainer}> 
           <Ticket /> <Ticket /> <Ticket />
         </div>
+        </Link>
+
       </div>
       <Footer />
     </div>

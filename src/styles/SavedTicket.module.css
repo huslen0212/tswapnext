@@ -5,12 +5,16 @@
     overflow: hidden;
     width: 350px;
     padding: 15px;
+    display: flex;
+    flex-direction: column;
+    align-items: center;
 }
 
 .ticketImage {
     width: 100%;
     height: 150px;
     object-fit: contain;
+    border-radius: 10px 10px 0 0;
 }
 
 .ticketInfo {
@@ -21,16 +25,12 @@
 .ticketPrice {
     font-size: 16px;
     font-weight: bold;
+    color: #000;
 }
 
 .ticketDescription {
     margin-top: 10px;
-}
-
-.ticketDescription label {
-    font-weight: bold;
-    display: block;
-    margin-bottom: 5px;
+    width: 100%;
 }
 
 .ticketDescription textarea {

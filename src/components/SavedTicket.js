@@ -1,7 +1,7 @@
 import Image from 'next/image';
-import styles from '../styles/Ticket.module.css';
+import styles from '../styles/SavedTicket.module.css';
 
-export default function Ticket() {
+export default function SavedTicket() {
   return (
     <div className={styles.ticketContainer}>
       <Image 
@@ -20,9 +20,7 @@ export default function Ticket() {
 
         <div className={styles.ticketDescription}>
           <label>Тайлбар:</label>
-          <textarea readOnly>
-            PlayTime-ийн тасалбар 7 сарын 14, 15, 16-ны тасалбар зарна шүү. Үнэ тохирч болно.
-          </textarea>
+          <textarea readOnly defaultValue="PlayTime-ийн тасалбар 7 сарын 14, 15, 16-ны тасалбар зарна шүү. Үнэ тохирч болно." />
         </div>
 
         <button className={styles.deleteButton}>Хасах</button>
