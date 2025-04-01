@@ -1,0 +1,12 @@
+.leftside {
+    display: flex;
+    flex-direction: column;
+    justify-content: center;
+    width: 50%;
+}
+
+.leftside img {
+    width: 100%;
+    height: 33.3vh;
+    object-fit: cover;
+}
