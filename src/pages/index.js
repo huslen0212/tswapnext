@@ -31,7 +31,7 @@ export default function Home() {
         </div>
         
         <div className={styles.ticketContainer}> 
-          <Ticket /> <Ticket /> <Ticket />  
+          <Ticket /> <Ticket /> <Ticket />
         </div>
 
       </div>

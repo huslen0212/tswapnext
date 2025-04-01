@@ -1,12 +1,96 @@
-.leftside {
-    display: flex;
-    flex-direction: column;
-    justify-content: center;
+/* Ерөнхий контейнерийн тохиргоо */
+.pageContainer {
+    display: table;
+    width: 100vw;
+    height: 100vh;
+    padding: 0 5%;
+    background-color: #f4f4f4;
+    table-layout: fixed;
+}
+
+.content{
+    width: 100%;
+}
+
+.pageRow {
+    display: table-row;
+}
+.leftside{
+    display: table-cell;
+    vertical-align: middle;
     width: 50%;
+}
+
+.rigthside {
+    display: table-cell;
+    vertical-align: middle;
+    width: 50%;
+        text-align: center;
+    padding: 10rem;
+}
+
+.leftside {
+    text-align: center;
 }
 
 .leftside img {
     width: 100%;
     height: 33.3vh;
     object-fit: cover;
+    display: block;
+}
+
+.rigthside h1 {
+    font-size: 2rem;
+    margin-bottom: 20px;
+    color: #333;
+}
+
+.loginForm {
+    display: block;
+    width: 100%;
+}
+
+
+
+.loginForm input {
+    width: 70%;
+    padding: 12px;
+    border: 1px solid #ccc;
+    border-radius: 5px;
+    font-size: 1rem;
+    margin-bottom: 10px;
+}
+
+.loginForm button {
+    width: 75%;
+    padding: 12px;
+    background-color: #1a1b62;
+    color: white;
+    font-size: 1rem;
+    border: none;
+    border-radius: 5px;
+    cursor: pointer;
+    transition: background 0.3s;
+}
+
+.loginForm button:hover {
+    background-color: #005bb5;
+}
+
+/* Бүртгүүлэх линк */
+.rigthside p {
+    margin-top: 15px;
+    font-size: 1rem;
+}
+
+.rigthside p a {
+    display: inline-block;
+    gap: 5px;
+    color: #1a1b62;
+    text-decoration: none;
+}
+
+.rigthside p a:hover {
+    text-decoration: underline;
 }
