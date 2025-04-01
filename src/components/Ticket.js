@@ -1,10 +1,11 @@
 import Image from "next/image";
 import styles from "../styles/Ticket.module.css";
+import Link from "next/link";
 
 export default function Ticket() {
     return (
       <section className={styles["ticket-list"]}>
-        <a href="../src/ticket.html">
+        <Link href="/ticketInfo">
           <div className={styles.ticket}> 
             <Image 
               src="/photos/ticket.jpeg" 
@@ -16,7 +17,7 @@ export default function Ticket() {
             <p>📅 2025 оны 07 сар 14 өдөр</p>
             <p>📍 Монгол шилтгээн</p>
           </div>
-        </a>
+        </Link>
       </section>
     );
 }

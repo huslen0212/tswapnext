@@ -30,11 +30,9 @@ export default function Home() {
           <h1>Таньд санал болгох тасалбар</h1>
         </div>
         
-        <Link href = "/ticketInfo">
         <div className={styles.ticketContainer}> 
-          <Ticket /> <Ticket /> <Ticket />
+          <Ticket /> <Ticket /> <Ticket />  
         </div>
-        </Link>
 
       </div>
       <Footer />
