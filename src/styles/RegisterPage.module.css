@@ -26,7 +26,7 @@
     vertical-align: middle;
     width: 50%;
     text-align: center;
-    padding: 10rem;
+    padding: 5rem;
 }
 
 .leftside {
@@ -42,7 +42,6 @@
 
 .rigthside h1 {
     font-size: 2rem;
-    margin-bottom: 20px;
     color: #1a1b62;
 }
 
@@ -74,11 +73,6 @@
 
 .loginForm button:hover {
     background-color: #005bb5;
-}
-
-.rigthside p {
-    margin-top: 15px;
-    font-size: 1rem;
 }
 
 .rigthside p a {
