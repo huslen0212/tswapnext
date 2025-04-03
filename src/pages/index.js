@@ -14,10 +14,21 @@ export default function Home() {
           <h1>Тасалбараа хялбараар борлуул</h1>
         </div>
 
-
         <div className={styles.searchContainer}>
-          <input type="text" placeholder="Хайлт хийнэ үү" />
-          <Image src="/photos/search.png" alt="Search Icon" width={24} height={24} className={styles.searchIcon} />
+          <div className={styles.searchInputWrapper}>
+            <Image 
+              src="/photos/search.png" 
+              alt="Search Icon" 
+              width={20} 
+              height={20} 
+              className={styles.searchIcon} 
+            />
+            <input 
+              type="text" 
+              placeholder="Хайлт хийнэ үү" 
+              className={styles.searchInput}
+            />
+          </div>
         </div>
 
         <div className={styles.categories}>
