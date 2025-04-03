@@ -1,0 +1,85 @@
+.ticketList {
+    display: flex;
+    justify-content: space-around;
+    flex-wrap: wrap;
+    gap: 20px;
+}
+
+.ticketContainer {
+    position: relative;
+    color: #1a1b62;
+    max-width: 400px;
+    width: 100%;
+}
+
+.ticketImage {
+    height: 150px;
+    width: 100%;
+    object-fit: cover;
+}
+
+.saveButton, .paymentButton {
+    width: 100%;
+    background-color: #1a1b62;
+    color: white;
+    padding: 10px;
+    border: none;
+    border-radius: 5px;
+    font-size: 16px;
+    cursor: pointer;
+    margin-bottom: 20px;
+}
+
+.ticketDescription {
+    max-width: 600px;
+    width: 100%;
+}
+
+.ticketDescription textarea {
+    display: flex;
+    font-family: Arial, sans-serif;
+    width: 500px;
+    height: 100px; 
+    border: 1px solid #ccc;
+    border-radius: 5px;
+    padding: 5px;
+    resize: none;
+    background: #f9f9f9;
+}
+
+.ticketDescription label {
+    color: #1a1b62;
+}
+
+.ticket-description h3 {
+    font-weight: normal;
+    color: #1a1b62;
+}
+
+
+.ticketTitle {
+    color: #202279;
+    margin-left: 150px;
+}
+
+.offerSection textarea {
+    width: 500px;
+    height: 60px;
+    border: 1px solid #ccc;
+    border-radius: 5px;
+    padding: 5px;
+    resize: none;
+    margin-top: 10px;
+}
+
+.commentButton {
+    background-color: #1a1b62;
+    color: white;
+    padding: 10px;
+    border: none;
+    border-radius: 5px;
+    font-size: 16px;
+    cursor: pointer;
+    margin-top: 10px;
+    width: 510px;
+}
