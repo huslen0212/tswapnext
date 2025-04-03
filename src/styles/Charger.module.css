@@ -1,0 +1,56 @@
+/* components/Charger.module.css */
+.main {
+  display: flex;
+  justify-content: space-around;
+  padding: 20px;
+  flex-wrap: wrap;
+}
+
+.charhis {
+  margin-bottom: 20px;
+  background-color: #a6a6a671;
+  border-radius: 10px;
+  height: 400px;
+  padding: 10px;
+}
+
+.charhis h2 {
+  font-size: 1.5rem;
+  margin-bottom: 10px;
+}
+
+.charger h2 {
+  font-size: 1.5rem;
+  margin-bottom: 10px;
+}
+
+.charger p {
+  margin-bottom: 15px;
+}
+
+.khan, .golomt, .tdb {
+  display: flex;
+  align-items: center;
+  margin-bottom: 15px;
+  text-decoration: none;
+  color: #333;
+}
+
+.khan img, .golomt img, .tdb img {
+  margin-right: 10px;
+}
+
+.khan:hover, .golomt:hover, .tdb:hover {
+  text-decoration: underline;
+  color: #0070f3;
+}
+
+.alert {
+  color: #d32f2f;
+  font-weight: bold;
+}
+
+.sanamj {
+  font-style: italic;
+  color: #666;
+}

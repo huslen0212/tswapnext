@@ -10,7 +10,7 @@ export default function Home() {
       <Header />
       <div className={styles.content}>
        <section classNeme={styles.TicketForm}>
-       <h1 style={{ color: '#ff7022' }}>Борлуулах тасалбараа нэмнэ үү:</h1>
+       <h1 style={{ color: 'rgb(6, 6, 125)' }}>Борлуулах тасалбараа нэмнэ үү:</h1>
          <TicketPhoto />
          <EventForm />
        </section>
