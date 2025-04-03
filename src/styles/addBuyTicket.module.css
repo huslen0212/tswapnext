@@ -1,0 +1,9 @@
+.content{
+    display: flex;
+    flex-wrap: wrap;
+    justify-content: space-around;
+}
+.TicketForm{
+margin: 20px;
+}
+
