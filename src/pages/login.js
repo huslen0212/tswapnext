@@ -73,3 +73,10 @@ export default function Login() {
     </div>
   );
 }
+
+//schema model table teige adilhan bolgono ticket order
+//npm prisma studio
+
+//api route dotro huseltuude bicne fronttoigo holbono 
+
+//nevtrsn bol user ee sessiond hadgaldg ym hiine
