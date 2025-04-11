@@ -45,4 +45,4 @@ Check out our [Next.js deployment documentation](https://nextjs.org/docs/pages/b
 //local deer db shalgah npx prisma studio (2t ajiluulna)
 
 
-
+//responsive(@media only screen and (max-width: 768 px))
