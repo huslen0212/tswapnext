@@ -5,7 +5,7 @@ import Link from "next/link";
 export default function Ticket() {
     return (
       <section className={styles["ticket-list"]}>
-        <Link href="/ticketInfo">
+        <Link href="/TicketPage/ticketInfo">
           <div className={styles.ticket}> 
             <Image 
               src="/photos/ticket.jpeg" 

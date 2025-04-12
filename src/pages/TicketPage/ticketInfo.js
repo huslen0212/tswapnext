@@ -1,9 +1,9 @@
 import Footer from '@/components/Footer';
-import Header from '../components/Header';
+import Header from '../../components/Header';
 import Image from "next/image";
-import styles from "../styles/TicketInfoPage.module.css";
+import styles from "../../styles/TicketInfoPage.module.css";
 
-export default function Home() {
+export default function TicketInfo() {
   return (
     <div className="pageContainer">
       <Header />

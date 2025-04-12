@@ -1,8 +1,7 @@
 import Image from 'next/image';
-import styles from '../styles/RegisterPage.module.css';
-import Link from 'next/link';
+import styles from '../../styles/RegisterPage.module.css';
 
-export default function Home() {
+export default function register() {
   return (
     <div className="pageContainer">
       <div className="content">
@@ -19,7 +18,6 @@ export default function Home() {
               <input type="text" id="username" placeholder="Нэр" required />
               <input type="text" id="username" placeholder="Утасны дугаар" required />
               <input type="text" id="username" placeholder="Цахим шуудан" required />
-              <input type="text" id="username" placeholder="Нэвтрэх нэр" required />
               <input type="password" id="password" placeholder="Нууц үг" required />
 
               <button type="submit">Бүртгүүлэх</button>

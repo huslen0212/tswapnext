@@ -1,11 +1,11 @@
 
 import Footer from '@/components/Footer';
-import Header from '../components/Header';
+import Header from '../../components/Header';
 import SavedTicket from '@/components/SavedTicket';
-import styles from '../styles/SavedTicketPage.module.css';
+import styles from '../../styles/SavedTicketPage.module.css';
 import { useState } from 'react';
 
-export default function Home() {
+export default function Savedticket() {
   const [tickets, setTickets] = useState([1, 2, 3,]);
 
   const handleDeleteTicket = (id) => {

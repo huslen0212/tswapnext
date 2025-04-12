@@ -1,7 +1,7 @@
 import Footer from '@/components/Footer';
-import Header from '../components/Header';
+import Header from '../../components/Header';
 import MyTicket from '@/components/MyTicket';
-import styles from '../styles/MyTicketPage.module.css';
+import styles from '../../styles/MyTicketPage.module.css';
 
 
 export default function Home() {

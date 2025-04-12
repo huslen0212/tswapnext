@@ -17,31 +17,31 @@ const Header = () => {
 
   return (
     <header className={styles.header}>
-      <Link href="/">
+      <Link href="/HomePage">
         <Image src="/photos/logo.png" alt="T Swap" height={130} width={150} />
       </Link>
       <div className={styles.headerButtons}>
         <div className={`${styles.menu} ${menuOpen ? styles.showMenu : ""}`}>
           <nav>
             <ul className={styles.navList}>
-              <li><Link className={styles.navLink} href="/savedTicket">Хадгалсан тасалбар</Link></li>
-              <li><Link className={styles.navLink} href="/myTicket">Миний тасалбар</Link></li>
+              <li><Link className={styles.navLink} href="/TicketPage/savedTicket">Хадгалсан тасалбар</Link></li>
+              <li><Link className={styles.navLink} href="/TicketPage/myTicket">Миний тасалбар</Link></li>
               <li className={styles.dropdown}>
                 <button className={styles.dropbtn} onClick={toggleDropdown}>Тасалбар нэмэх</button>
                 <ul className={`${styles.dropdownContent} ${dropdownOpen ? styles.show : ""}`}>
-                  <li><Link href="/addTicket">Борлуулах тасалбар нэмэх</Link></li>
-                  <li><Link href="/addBuyTicket">Худалдан авах тасалбар нэмэх</Link></li>
+                  <li><Link href="/AddTicketPage/addTicket">Борлуулах тасалбар нэмэх</Link></li>
+                  <li><Link href="/AddTicketPage/addBuyTicket">Худалдан авах тасалбар нэмэх</Link></li>
                 </ul>
               </li>
             </ul>
           </nav>
-          <Link href="/balance">
+          <Link href="/BalancePage/balance">
             <button className={styles.balance}>
               <Image src="/photos/plus.png" alt="Balance" width={17} height={17} />
               <b>5000.00₮</b>
             </button>
           </Link>
-          <Link href="/login">
+          <Link href="/LoginPage/login">
             <button className={styles.loginBtn}>Нэвтрэх</button>
           </Link>
         </div>

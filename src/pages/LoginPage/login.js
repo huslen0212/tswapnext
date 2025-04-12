@@ -1,6 +1,6 @@
 import { useState } from 'react';
 import Image from 'next/image';
-import styles from '../styles/LoginPage.module.css';
+import styles from '../../styles/LoginPage.module.css';
 import Link from 'next/link';
 
 export default function Login() {
@@ -49,7 +49,7 @@ export default function Login() {
             <input
               type="text"
               id="username"
-              placeholder="Нэвтрэх нэр"
+              placeholder="Цахим шуудан"
               value={username}
               onChange={(e) => setUsername(e.target.value)}
               required
@@ -66,7 +66,7 @@ export default function Login() {
             <button type="submit">Нэвтрэх</button>
           </form>
           <p>
-            Шинэ хэрэглэгч болох: <Link href="/register">Бүртгүүлэх</Link>
+            Шинэ хэрэглэгч болох: <Link href="/RegisterPage/register">Бүртгүүлэх</Link>
           </p>
         </div>
       </div>
