@@ -1,0 +1,24 @@
+.categories {
+    display: flex;
+    justify-content: center;
+    gap: 5px;
+  }
+  
+  .categoryButton {
+    width: 100px;
+    padding: 8px ;
+    background-color: #b2b2b2d7;
+    border: none;
+    cursor: pointer;
+    border-radius: 10px;
+  }
+  
+  .categoryButton:hover {
+    background-color: #929292;
+  }
+  
+  .active {
+    background-color: #0070f3;
+    color: white;
+  }
+  

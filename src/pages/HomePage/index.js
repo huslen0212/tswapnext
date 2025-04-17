@@ -3,6 +3,7 @@ import Header from '@/components/Header';
 import Image from 'next/image';
 import styles from '../../styles/IndexPage.module.css';
 import Ticket from '@/components/Ticket';
+import CategoryButtons from '../../components/CategoryButtons';
 
 export default function Home() {
   return (
@@ -29,13 +30,7 @@ export default function Home() {
             />
           </div>
         </div>
-
-        <div className={styles.categories}>
-          {["Бүх төрөл", "Концерт", "Спорт", "Купон", "Эвент", "Бусад"].map((category, index) => (
-            <button key={index}>{category}</button>
-          ))}
-        </div>
-
+        <CategoryButtons/>
         <div className={styles.headingContainer}>
           <h1>Таньд санал болгох тасалбар</h1>
         </div>
