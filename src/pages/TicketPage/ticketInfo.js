@@ -1,7 +1,7 @@
 import Footer from '@/components/Footer';
 import Header from '../../components/Header';
 import Image from "next/image";
-import styles from "../../styles/TicketInfoPage.module.css";
+import styles from "../TicketPage/TicketInfo.module.css";
 
 export default function TicketInfo() {
   return (

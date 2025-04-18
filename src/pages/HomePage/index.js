@@ -1,7 +1,7 @@
 import Footer from '@/components/Footer';
 import Header from '@/components/Header';
 import Image from 'next/image';
-import styles from '../../styles/IndexPage.module.css';
+import styles from '../HomePage/IndexPage.module.css';
 import Ticket from '@/components/Ticket';
 import CategoryButtons from '../../components/CategoryButtons';
 

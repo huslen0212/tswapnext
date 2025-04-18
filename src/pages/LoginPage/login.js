@@ -1,6 +1,6 @@
 import { useState } from 'react';
 import Image from 'next/image';
-import styles from '../../styles/LoginPage.module.css';
+import styles from '../LoginPage/LoginPage.module.css';
 import Link from 'next/link';
 
 export default function Login() {

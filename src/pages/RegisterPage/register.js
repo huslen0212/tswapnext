@@ -1,5 +1,5 @@
 import Image from 'next/image';
-import styles from '../../styles/RegisterPage.module.css';
+import styles from '../RegisterPage/RegisterPage.module.css';
 
 export default function register() {
   return (

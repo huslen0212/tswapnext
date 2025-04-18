@@ -2,7 +2,7 @@
 import Footer from '@/components/Footer';
 import Header from '../../components/Header';
 import SavedTicket from '@/components/SavedTicket';
-import styles from '../../styles/SavedTicketPage.module.css';
+import styles from '../TicketPage/SavedTicketPage.module.css';
 import { useState } from 'react';
 
 export default function Savedticket() {
