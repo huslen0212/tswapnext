@@ -3,7 +3,7 @@
 import { useState } from 'react';
 import styles from '../styles/DescriptionForm.module.css';
 
-export default function DescriptionForm() {
+export default function DescriptionForm(props) {
   const [description, setDescription] = useState('');
 
   const handleChange = (e) => {
@@ -13,23 +13,28 @@ export default function DescriptionForm() {
   const handleSubmit = (e) => {
     e.preventDefault();
     console.log('Нэмэгдсэн тайлбар:', description);
-    // Энд таны хүссэн логик (жишээ нь API руу илгээх) орж болно
-    setDescription(''); // Тайлбарыг хоослоно (шаардлагагүй бол хасна уу)
+    setDescription('');
   };
 
   return (
     <form onSubmit={handleSubmit} className={styles.container}>
-      <label htmlFor="description" className={styles.label}>
+      <label htmlFor="description" 
+      className={styles.label}
+      style={{ color: props.color }} >
         Тайлбар:
       </label>
       <textarea
         id="description"
-        placeholder="Энд бичнэ үү "
+        placeholder="Энд бичнэ үү"
         value={description}
         onChange={handleChange}
         className={styles.textarea}
       />
-      <button type="submit" className={styles.addButton}>
+      <button
+        type="submit"
+        className={styles.addButton}
+        style={{ backgroundColor: props.color }} 
+      >
         Нэмэх
       </button>
     </form>

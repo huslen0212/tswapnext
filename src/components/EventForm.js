@@ -3,7 +3,7 @@
 import { useState } from 'react';
 import styles from '../styles/EventForm.module.css';
 
-export default function EventForm() {
+export default function EventForm(props) {
   const [formData, setFormData] = useState({
     location: '',
     date: '',
@@ -25,7 +25,8 @@ export default function EventForm() {
   };
 
   return (
-    <div className={styles.container}>
+    <div className={styles.container}
+         style={{ color: props.color }}>
       <form onSubmit={handleSubmit}>
         <div className={styles.field}>
           <label htmlFor="location" className={styles.label}>

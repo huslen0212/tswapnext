@@ -12,11 +12,11 @@ export default function addBuyTicket() {
       <div className={styles.content}>
        <section classNeme={styles.TicketForm}>
        <h1 style={{ color: '#ff7022' }}>Хайх тасалбар нэмэх:</h1>
-         <TicketPhoto />
+         <TicketPhoto/>
          <EventForm />
        </section>
        <div className={styles.description}>
-        <DescriptionForm/>
+        <DescriptionForm />
        </div>
       </div>
       <Footer />

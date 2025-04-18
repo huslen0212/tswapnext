@@ -13,10 +13,10 @@ export default function addTicket() {
        <section classNeme={styles.TicketForm}>
        <h1 style={{ color: 'rgb(6, 6, 125)' }}>Борлуулах тасалбараа нэмнэ үү:</h1>
          <TicketPhoto />
-         <EventForm />
+         <EventForm color = "rgb(6, 6, 125)"/>
        </section>
        <div className={styles.description}>
-        <DescriptionForm/>
+        <DescriptionForm color="rgb(6, 6, 125)"/>
        </div>
       </div>
       <Footer />
