@@ -1,4 +1,5 @@
 import { useState } from 'react';
+import Image from 'next/image';
 import styles from '../styles/TicketPhoto.module.css'; 
 
 const TicketPhoto = () => {
@@ -33,7 +34,7 @@ const TicketPhoto = () => {
       </a>
       {preview && (
         <div className={styles.preview}>
-          <img src={preview} alt="Тасалбарын зураг" style={{ maxWidth: '200px', marginTop: '10px' }} />
+          <Image src={preview} alt="Тасалбарын зураг" style={{ maxWidth: '200px', marginTop: '10px' }} />
         </div>
       )}
     </div>
