@@ -82,7 +82,7 @@
   display: block;
 }
 
-.balance, .loginBtn {
+.balance, .loginBtn, .logoutBtn {
   background: #202279;
   color: #fff;
   border: none;
@@ -98,6 +98,12 @@
   min-width: 100px;
 }
 
+.email {
+  color: #202279;
+  font-size: 16px;
+  font-weight: bold;
+  margin-top: 10px;
+}
 .balance img, .loginBtn img {
   width: 17px;
   height: 17px;

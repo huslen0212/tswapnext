@@ -1,6 +1,6 @@
 import Footer from '@/components/Footer';
 import Header from '../../components/Header';
-import MyTicket from '@/components/MyTicket';
+import Ticket from '@/components/Ticket';
 import styles from '../TicketPage/MyTicketPage.module.css';
 
 
@@ -15,8 +15,7 @@ export default function Home() {
         </div>
 
         <div className={styles.ticketContainer}> 
-          <MyTicket /> <MyTicket /> <MyTicket />
-          <MyTicket /> <MyTicket /> <MyTicket />
+        <Ticket /> <Ticket /> <Ticket /> <Ticket /> <Ticket /> <Ticket />
         </div>
       </div>
       <Footer />

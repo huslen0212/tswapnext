@@ -1,27 +1,32 @@
-import { prisma } from '../../../../lib/prisma'; // Assuming you have Prisma set up
+import { prisma } from '../../../../lib/prisma';
+import { serialize } from 'cookie'; // ✅ Import cookie serializer
 
 export default async function handler(req, res) {
   if (req.method === 'POST') {
     const { username, password } = req.body;
 
     try {
-      // Find the user in the database by username
+      // Find the user by email (username)
       const user = await prisma.users.findUnique({
-        where: { email: username }, // Assuming the username is stored in the 'email' column
+        where: { email: username },
       });
 
-      // If user is not found
-      if (!user) {
+      if (!user || user.password !== password) {
         return res.status(401).json({ error: 'Invalid username or password' });
       }
 
-      // Directly compare the stored password with the entered password
-      if (user.password !== password) {
-        return res.status(401).json({ error: 'Invalid username or password' });
-      }
+      // ✅ Set cookie: userEmail
+      const cookie = serialize('userEmail', user.email, {
+        httpOnly: false, // Set to true if you want it unreadable by JavaScript
+        secure: process.env.NODE_ENV === 'production',
+        sameSite: 'strict',
+        maxAge: 60 * 60 * 24 * 7, // 1 week
+        path: '/',
+      });
 
-      // Optionally, create a session or JWT token here for user authentication
-      // Example: Returning a success message (or JWT token)
+      res.setHeader('Set-Cookie', cookie);
+
+      // Success response
       return res.status(200).json({ message: 'Login successful' });
 
     } catch (error) {
