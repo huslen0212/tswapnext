@@ -27,6 +27,7 @@ model Users {
 
 model Tickets {
   ticket_id       Int        @id @default(autoincrement())
+  ticket_title    String?
   ticket_type     String?
   ticket_category String?
   place           String?
