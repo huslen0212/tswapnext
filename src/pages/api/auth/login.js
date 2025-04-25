@@ -1,5 +1,5 @@
 import { prisma } from '../../../../lib/prisma';
-import { serialize } from 'cookie'; // ✅ Import cookie serializer
+import { serialize } from 'cookie'; // Import cookie serializer
 
 export default async function handler(req, res) {
   if (req.method === 'POST') {
@@ -15,7 +15,7 @@ export default async function handler(req, res) {
         return res.status(401).json({ error: 'Invalid username or password' });
       }
 
-      // ✅ Set cookie: userEmail
+      // Set cookie: userEmail
       const cookie = serialize('userEmail', user.email, {
         httpOnly: false, // Set to true if you want it unreadable by JavaScript
         secure: process.env.NODE_ENV === 'production',

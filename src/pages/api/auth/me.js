@@ -1,4 +1,3 @@
-// pages/api/auth/me.js
 import { parse } from 'cookie';
 
 export default function handler(req, res) {

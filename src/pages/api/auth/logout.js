@@ -1,6 +1,3 @@
-// pages/api/auth/logout.js
-import { cookies } from 'next/headers';
-
 export default async function handler(req, res) {
   if (req.method === 'POST') {
     // Delete the userEmail cookie
