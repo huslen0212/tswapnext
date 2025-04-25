@@ -15,7 +15,7 @@ export default function TicketInfo() {
     if (!id) return;
 
     async function fetchTicket() {
-      const res = await fetch(`/api/tickets/${id}`);
+      const res = await fetch(`/api/ticket/${id}`);
       const data = await res.json();
       setTicket(data);
     }
