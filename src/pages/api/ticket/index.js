@@ -6,8 +6,11 @@ export default async function handler(req, res) {
     return res.status(405).json({ error: 'Method not allowed' });
   }
 
+  const { category } = req.query;
+
   try {
     const tickets = await prisma.tickets.findMany({
+      where: category && category !== 'all' ? { ticket_category: category } : {},
       orderBy: { date: 'asc' },
       select: {
         ticket_id: true,
@@ -16,6 +19,7 @@ export default async function handler(req, res) {
         description: true,
         date: true,
         place: true,
+        ticket_category: true, // энэ мөрийг нэм
       },
     });
 

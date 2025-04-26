@@ -1,35 +1,30 @@
-// components/CategoryButtons.js
 'use client';
 
-import Link from 'next/link';
-import { usePathname } from 'next/navigation';
-import styles from '../styles/CategoryButtons.module.css'; 
+import styles from '../styles/CategoryButtons.module.css';
 
 const categories = [
-  { name: 'Бүх төрөл', path: '/TicketsType/allType' },
-  { name: 'Концерт', path: '/TicketsType/concert' },
-  { name: 'Спорт', path: '/TicketsType/sport' },
-  { name: 'Купон', path: '/TicketsType/coupon' },
-  { name: 'Эвент', path: '/TicketsType/event' },
-  { name: 'Бусад', path: '/TicketsType/other' },
+  { name: 'Бүх төрөл', value: 'all' },
+  { name: 'Концерт', value: 'Концерт' },
+  { name: 'Спорт', value: 'Спорт' },
+  { name: 'Купон', value: 'Купон' },
+  { name: 'Эвент', value: 'Эвент' },
+  { name: 'Бусад', value: 'Бусад' },
 ];
 
-export default function CategoryButtons() {
-  const pathname = usePathname();
-
+export default function CategoryButtons({ selectedCategory, setSelectedCategory }) {
   return (
     <div className={styles.categories}>
       {categories.map((category, index) => (
-        <Link key={index} href={category.path}>
-          <button
-            type="button"
-            className={`${styles.categoryButton} ${
-              pathname === category.path ? styles.active : ''
-            }`}
-          >
-            {category.name}
-          </button>
-        </Link>
+        <button
+          key={index}
+          type="button"
+          onClick={() => setSelectedCategory(category.value)}
+          className={`${styles.categoryButton} ${
+            selectedCategory === category.value ? styles.active : ''
+          }`}
+        >
+          {category.name}
+        </button>
       ))}
     </div>
   );

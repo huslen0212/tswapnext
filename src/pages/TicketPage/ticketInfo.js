@@ -48,7 +48,7 @@ export default function TicketInfo() {
               <p>Үнэ: {ticket.ticket_price ? `${ticket.ticket_price.toLocaleString()}₮` : "Үнэ тодорхойгүй"}</p>
             </div>
             <button className={styles.saveButton}>Хадгалах</button>
-            <button className={styles.paymentButton}>Төлбөр төлөх</button>
+            <button className={styles.paymentButton}>Төлбөр төлөх</button> 
           </div>
           <div className={styles.ticketDescription}>
             <label>Тайлбар:</label>
@@ -69,3 +69,11 @@ export default function TicketInfo() {
     </div>
   );
 }
+
+//ticket.status === "sold" ? (
+
+//if(ticketstatus==="sold"){
+
+
+
+//if(guilgesn tsag == 30) {ticket.status='available'}
