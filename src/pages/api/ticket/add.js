@@ -1,3 +1,4 @@
+// /pages/api/ticket.js
 import { PrismaClient } from '@prisma/client';
 const prisma = new PrismaClient();
 
@@ -5,7 +6,6 @@ export default async function handler(req, res) {
   if (req.method === 'POST') {
     const { place, date, ticket_category, price, description } = req.body;
 
-    // Талбарууд хоосон бол
     if (!place || !date || !ticket_category || !price || !description) {
       return res.status(400).json({ error: 'Бүх талбаруудыг бөглөнө үү.' });
     }
