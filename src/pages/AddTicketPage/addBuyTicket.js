@@ -8,27 +8,82 @@ import EventForm from '@/components/EventForm';
 import DescriptionForm from '@/components/DescriptionForm';
 import styles from '../../styles/addBuyTicket.module.css';
 
-export default function addBuyTicket() {
+export default function AddBuyTicket() {
   const [formData, setFormData] = useState({
+    ticket_title: '',
+    ticket_type: 'Buy',
+    ticket_category: '',
     place: '',
     date: '',
-    ticket_category: '',
     price: '',
     description: '',
+    ticket_image: '',
+    ticket_status: 'active',
   });
+
+  const [loading, setLoading] = useState(false);
+  const [message, setMessage] = useState('');
+
+  const handleSubmit = async (e) => {
+    e.preventDefault();
+    setLoading(true);
+    setMessage('');
+
+    try {
+      const res = await fetch('/api/tickets', {
+        method: 'POST',
+        headers: {
+          'Content-Type': 'application/json',
+        },
+        body: JSON.stringify(formData),
+      });
+
+      if (res.ok) {
+        setMessage('Тасалбар амжилттай нэмэгдлээ!');
+        setFormData({
+          ticket_title: '',
+          ticket_type: 'Buy',
+          ticket_category: '',
+          place: '',
+          date: '',
+          price: '',
+          description: '',
+          ticket_image: '',
+          ticket_status: '',
+        });
+      } else {
+        setMessage('Алдаа гарлаа. Та дахин оролдоно уу.');
+      }
+    } catch (error) {
+      console.error('Fetch error:', error);
+      setMessage('Сервертэй холбогдож чадсангүй.');
+    } finally {
+      setLoading(false);
+    }
+  };
 
   return (
     <div className="pageContainer">
       <Header />
       <div className={styles.content}>
-        <section className={styles.TicketForm}>
+        <form onSubmit={handleSubmit} className={styles.TicketForm}>
           <h1 style={{ color: '#ff7022' }}>Хайх тасалбар нэмэх:</h1>
           <TicketPhoto setFormData={setFormData} />
           <EventForm formData={formData} setFormData={setFormData} color="#ff7022" />
-        </section>
-        <div className={styles.description}>
-          <DescriptionForm formData={formData} setFormData={setFormData} color="#ff7022" />
-        </div>
+          <div className={styles.description}>
+            <DescriptionForm formData={formData} setFormData={setFormData} color="#ff7022" />
+          </div>
+
+          <button
+            type="submit"
+            className={styles.submitButton}
+            style={{ backgroundColor: '#ff7022' }}
+            disabled={loading}
+          >
+            {loading ? 'Илгээж байна...' : 'Илгээх'}
+          </button>
+          {message && <p className={styles.message}>{message}</p>}
+        </form>
       </div>
       <Footer />
     </div>

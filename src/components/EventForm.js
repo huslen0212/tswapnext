@@ -15,6 +15,20 @@ export default function EventForm({ formData, setFormData, color }) {
   return (
     <div className={styles.container} style={{ color }}>
       <div className={styles.field}>
+        <label htmlFor="ticket_title" className={styles.label}>
+          Тасалбарын нэр:
+        </label>
+        <input
+          type="text"
+          id="ticket_title"
+          name="ticket_title"
+          placeholder="Энд бичнэ үү..."
+          value={formData.ticket_title || ''} 
+          onChange={handleChange}
+          className={styles.input}
+        />
+      </div>
+      <div className={styles.field}>
         <label htmlFor="place" className={styles.label}>
           Хаана:
         </label>
@@ -67,13 +81,13 @@ export default function EventForm({ formData, setFormData, color }) {
       </div>
 
       <div className={styles.field}>
-        <label htmlFor="price" className={styles.label}>
+        <label htmlFor="ticket_price" className={styles.label}>
           Үнэ:
         </label>
         <input
           type="text"
-          id="price"
-          name="price"
+          id="ticket_price"
+          name="ticket_price"
           placeholder="Энд бичнэ үү..."
           value={formData.price || ''}
           onChange={handleChange}

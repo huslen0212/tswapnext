@@ -1,23 +1,47 @@
-// /pages/api/ticket.js
 import { PrismaClient } from '@prisma/client';
 const prisma = new PrismaClient();
 
 export default async function handler(req, res) {
   if (req.method === 'POST') {
-    const { place, date, ticket_category, price, description } = req.body;
+    const {
+      ticket_title,
+      ticket_type,
+      ticket_category,
+      place,
+      description,
+      date,
+      ticket_price,
+      ticket_image,
+      ticket_status
+    } = req.body;
 
-    if (!place || !date || !ticket_category || !price || !description) {
+    // Талбарууд дутуу эсэхийг шалгах
+    if (
+      !ticket_title ||
+      !ticket_type ||
+      !ticket_category ||
+      !place ||
+      !description ||
+      !date ||
+      !ticket_price ||
+      !ticket_image ||
+      !ticket_status
+    ) {
       return res.status(400).json({ error: 'Бүх талбаруудыг бөглөнө үү.' });
     }
 
     try {
       const ticket = await prisma.ticket.create({
         data: {
-          place,
-          date,
+          ticket_title,
+          ticket_type,
           ticket_category,
-          price,
+          place,
           description,
+          date,
+          ticket_price,
+          ticket_image,
+          ticket_status,
         },
       });
       return res.status(201).json(ticket);

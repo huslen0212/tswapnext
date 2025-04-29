@@ -1,31 +1,29 @@
-import { PrismaClient } from '@prisma/client';
-const prisma = new PrismaClient();
+'use client';
 
-export default async function handler(req, res) {
-  if (req.method === 'POST') {
-    const { place, date, ticket_category, price, description } = req.body;
+import styles from '../styles/DescriptionForm.module.css';
 
-    // Талбарууд хоосон бол
-    if (!place || !date || !ticket_category || !price || !description) {
-      return res.status(400).json({ error: 'Бүх талбаруудыг бөглөнө үү.' });
-    }
+export default function DescriptionForm({ formData, setFormData, color }) {
+  const handleChange = (e) => {
+    const { value } = e.target;
+    setFormData(prev => ({
+      ...prev,
+      description: value,
+    }));
+  };
 
-    try {
-      const ticket = await prisma.ticket.create({
-        data: {
-          place,
-          date,
-          ticket_category,
-          price,
-          description,
-        },
-      });
-      return res.status(201).json(ticket);
-    } catch (error) {
-      console.error(error);
-      return res.status(500).json({ error: 'Серверийн алдаа' });
-    }
-  } else {
-    res.status(405).json({ error: 'Метод зөвшөөрөгдөөгүй' });
-  }
+  return (
+    <div className={styles.container}>
+      <label htmlFor="description" className={styles.label} style={{ color }}>
+        Тайлбар:
+      </label>
+      <textarea
+        id="description"
+        name="description"
+        placeholder="Энд бичнэ үү"
+        value={formData.description || ''}
+        onChange={handleChange}
+        className={styles.textarea}
+      />
+    </div>
+  );
 }
