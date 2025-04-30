@@ -74,6 +74,7 @@ export default function AddBuyTicket() {
           </div>
           <div className={styles.description}>
             <DescriptionForm formData={formData} setFormData={setFormData} color="#ff7022" />
+            <div className={styles.golulah}>
             <button
             type="submit"
             className={styles.submitButton}
@@ -83,6 +84,7 @@ export default function AddBuyTicket() {
             {loading ? 'Илгээж байна...' : 'Илгээх'}
           </button>
           {message && <p className={styles.message}>{message}</p>}
+          </div>
           </div>
         </form>
       </div>
