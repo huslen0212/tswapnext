@@ -1,9 +1,10 @@
-.content{
+.TicketForm{
+    margin-top: 20px;
     display: flex;
     flex-wrap: wrap;
     justify-content: space-around;
-    color: rgb(6, 6, 125);
-}
-.TicketForm{
-margin: 20px;
-}
+    }
+    .golulah{
+        display:flex;
+        justify-content: center;
+    }

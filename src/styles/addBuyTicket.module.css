@@ -1,9 +1,11 @@
-.content{
-    display: flex;
-    flex-wrap: wrap;
-    justify-content: space-around;
-}
-.TicketForm{
-margin: 20px;
-}
 
+.TicketForm{
+margin-top: 20px;
+display: flex;
+flex-wrap: wrap;
+justify-content: space-around;
+}
+.golulah{
+    display:flex;
+    justify-content: center;
+}

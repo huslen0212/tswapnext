@@ -47,8 +47,8 @@ const Header = () => {
               <li className={styles.dropdown}>
                 <button className={styles.dropbtn} onClick={toggleDropdown}>Тасалбар нэмэх</button>
                 <ul className={`${styles.dropdownContent} ${dropdownOpen ? styles.show : ""}`}>
-                  <li><Link href="/AddTicketPage/addTicket">Борлуулах тасалбар нэмэх</Link></li>
-                  <li><Link href="/AddTicketPage/addBuyTicket">Худалдан авах тасалбар нэмэх</Link></li>
+                  <li><Link href="/AddTicketPage/AddTicket">Борлуулах тасалбар нэмэх</Link></li>
+                  <li><Link href="/AddTicketPage/AddBuyTicket">Худалдан авах тасалбар нэмэх</Link></li>
                 </ul>
               </li>
             </ul>
