@@ -15,7 +15,7 @@ export default function EventForm({ formData, setFormData, color }) {
   return (
     <div className={styles.container} style={{ color }}>
       <div className={styles.field}>
-        <label htmlFor="ticket_title" className={styles.label}>
+        <label htmlFor="ticket_title" className={styles.label} style={{ color }}>
           Тасалбарын нэр:
         </label>
         <input
@@ -29,7 +29,7 @@ export default function EventForm({ formData, setFormData, color }) {
         />
       </div>
       <div className={styles.field}>
-        <label htmlFor="place" className={styles.label}>
+        <label htmlFor="place" className={styles.label} style={{ color }}>
           Хаана:
         </label>
         <input
@@ -37,14 +37,14 @@ export default function EventForm({ formData, setFormData, color }) {
           id="place"
           name="place"
           placeholder="Энд бичнэ үү..."
-          value={formData.place || ''} // formData.place ашиглана
+          value={formData.place || ''} 
           onChange={handleChange}
           className={styles.input}
         />
       </div>
 
-      <div className={styles.field}>
-        <label htmlFor="date" className={styles.label}>
+      <div className={styles.field} >
+        <label htmlFor="date" className={styles.label} style={{ color }}>
           Хэзээ:
         </label>
         <input
@@ -59,7 +59,7 @@ export default function EventForm({ formData, setFormData, color }) {
       </div>
 
       <div className={styles.field}>
-        <label htmlFor="ticket_category" className={styles.label}>
+        <label htmlFor="ticket_category" className={styles.label} style={{ color }}>
           Төрөл:
         </label>
         <select
@@ -81,13 +81,13 @@ export default function EventForm({ formData, setFormData, color }) {
       </div>
 
       <div className={styles.field}>
-        <label htmlFor="ticket_price" className={styles.label}>
+        <label htmlFor="ticket_price" className={styles.label} style={{ color }}>
           Үнэ:
         </label>
         <input
           type="text"
           id="ticket_price"
-          name="ticket_price"
+          name="price"
           placeholder="Энд бичнэ үү..."
           value={formData.price || ''}
           onChange={handleChange}

@@ -67,22 +67,23 @@ export default function AddBuyTicket() {
       <Header />
       <div className={styles.content}>
         <form onSubmit={handleSubmit} className={styles.TicketForm}>
+          <div className={styles.urd}>
           <h1 style={{ color: '#ff7022' }}>Хайх тасалбар нэмэх:</h1>
           <TicketPhoto setFormData={setFormData} />
           <EventForm formData={formData} setFormData={setFormData} color="#ff7022" />
+          </div>
           <div className={styles.description}>
             <DescriptionForm formData={formData} setFormData={setFormData} color="#ff7022" />
-          </div>
-
-          <button
+            <button
             type="submit"
             className={styles.submitButton}
-            style={{ backgroundColor: '#ff7022' }}
+            style={{ backgroundColor: '#ff7022',width: '200px',heigth:'30px' }}
             disabled={loading}
           >
             {loading ? 'Илгээж байна...' : 'Илгээх'}
           </button>
           {message && <p className={styles.message}>{message}</p>}
+          </div>
         </form>
       </div>
       <Footer />

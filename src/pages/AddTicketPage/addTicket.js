@@ -67,21 +67,25 @@ export default function AddTicket() {
       <Header />
       <div className={styles.content}>
         <form onSubmit={handleSubmit} className={styles.TicketForm}>
+          <div className='urd'>
           <h1 style={{ color: 'rgb(6, 6, 125)' }}>Борлуулах тасалбараа нэмнэ үү:</h1>
           <TicketPhoto setFormData={setFormData} />
           <EventForm formData={formData} setFormData={setFormData} color="rgb(6, 6, 125)" />
+          </div>
           <div className={styles.description}>
             <DescriptionForm formData={formData} setFormData={setFormData} color="rgb(6, 6, 125)" />
-          </div>
-          <button
+            <div className='golulah'>
+            <button
             type="submit"
             className={styles.submitButton}
-            style={{ backgroundColor: 'rgb(6, 6, 125)' }}
+            style={{ backgroundColor: 'rgb(6, 6, 125)',width: '200px',heigth:'30px',color: 'white' }}
             disabled={loading}
           >
             {loading ? 'Илгээж байна...' : 'Илгээх'}
           </button>
           {message && <p className={styles.message}>{message}</p>}
+            </div>
+          </div>
         </form>
       </div>
       <Footer />
