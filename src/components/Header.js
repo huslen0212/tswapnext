@@ -59,7 +59,7 @@ const Header = () => {
             <Link href="/BalancePage/balance">
               <button className={styles.balance}>
                 <Image src="/photos/plus.png" alt="Balance" width={17} height={17} />
-                <b>5000.00₮</b>
+                <b>0.00₮</b>
               </button>
             </Link>
           )}
