@@ -5,16 +5,6 @@ import Link from "next/link";
 
 export default function Ticket({ ticket}) {
   if (!ticket) return null;
-  // const [tickets, setTickets] = useState([]);
-
-  // useEffect(() => {
-  //   async function fetchTickets() {
-  //     const res = await fetch("/api/tickets");
-  //     const data = await res.json();
-  //     setTickets(data);
-  //   }
-  //   fetchTickets();
-  // }, []);
 
   return (
     <section className={styles["ticket-list"]}>

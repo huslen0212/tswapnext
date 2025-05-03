@@ -1,36 +1,14 @@
-import { useEffect, useState } from "react";
+import { useSession, signOut } from "next-auth/react";
 import Link from "next/link";
 import Image from "next/image";
 import styles from "../styles/Header.module.css";
 
 const Header = () => {
-  const [menuOpen, setMenuOpen] = useState(false);
-  const [dropdownOpen, setDropdownOpen] = useState(false);
-  const [userEmail, setUserEmail] = useState(null);
-
-  const toggleMenu = () => {
-    setMenuOpen(!menuOpen);
-  };
-
-  const toggleDropdown = () => {
-    setDropdownOpen(!dropdownOpen);
-  };
-
-  useEffect(() => {
-    async function fetchEmail() {
-      const res = await fetch('/api/auth/me');
-      const data = await res.json();
-      if (data.email) {
-        setUserEmail(data.email);
-      }
-    }
-
-    fetchEmail();
-  }, []);
+  const { data: session } = useSession();
+  const userEmail = session?.user?.email;
 
   const logout = async () => {
-    await fetch('/api/auth/logout', { method: 'POST' });
-    setUserEmail(null);
+    await signOut({ callbackUrl: '/HomePage' });
   };
 
   return (
@@ -39,22 +17,21 @@ const Header = () => {
         <Image src="/photos/logo.png" alt="T Swap" height={130} width={150} />
       </Link>
       <div className={styles.headerButtons}>
-        <div className={`${styles.menu} ${menuOpen ? styles.showMenu : ""}`}>
+        <div className={`${styles.menu}`}>
           <nav>
             <ul className={styles.navList}>
               <li><Link className={styles.navLink} href="/TicketPage/savedTicket">Хадгалсан тасалбар</Link></li>
               <li><Link className={styles.navLink} href="/TicketPage/myTicket">Миний тасалбар</Link></li>
               <li className={styles.dropdown}>
-                <button className={styles.dropbtn} onClick={toggleDropdown}>Тасалбар нэмэх</button>
-                <ul className={`${styles.dropdownContent} ${dropdownOpen ? styles.show : ""}`}>
+                <button className={styles.dropbtn}>Тасалбар нэмэх</button>
+                <ul className={styles.dropdownContent}>
                   <li><Link href="/AddTicketPage/addTicket">Борлуулах тасалбар нэмэх</Link></li>
                   <li><Link href="/AddTicketPage/addBuyTicket">Худалдан авах тасалбар нэмэх</Link></li>
                 </ul>
               </li>
             </ul>
           </nav>
-          
-          {/* Conditionally render Balance button based on user login status */}
+
           {userEmail && (
             <Link href="/BalancePage/balance">
               <button className={styles.balance}>
@@ -64,7 +41,6 @@ const Header = () => {
             </Link>
           )}
 
-          {/* Conditionally render Logout button and email */}
           {userEmail ? (
             <>
               <span className={styles.email}>{userEmail}</span>

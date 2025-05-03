@@ -1,9 +1,32 @@
-.content{
+.content {
     display: flex;
-    flex-wrap: wrap;
-    justify-content: space-around;
+    justify-content: space-evenly;
     color: rgb(6, 6, 125);
-}
-.TicketForm{
-margin: 20px;
-}
+  }
+  
+  .TicketForm {
+    margin: 20px;
+  }
+  
+  .description {
+    display: flex;
+    flex-direction: column;
+    align-items: flex-start;
+  }
+  
+  .submitButton {
+    margin-top: 20px; /* Adds space between the form and the button */
+    background-color: rgb(6, 6, 125);
+    color: white;
+    padding: 10px 20px;
+    border: none;
+    border-radius: 5px;
+    font-size: 16px;
+    cursor: pointer;
+    transition: background-color 0.3s ease;
+  }
+  
+  .submitButton:hover {
+    background-color: rgb(10, 10, 150);
+  }
+  

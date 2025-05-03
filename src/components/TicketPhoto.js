@@ -1,15 +1,18 @@
 import { useState } from 'react';
 import Image from 'next/image';
-import styles from '../styles/TicketPhoto.module.css'; 
+import styles from '../styles/TicketPhoto.module.css';
 
-const TicketPhoto = () => {
-  const [preview, setPreview] = useState(null); 
+const TicketPhoto = ({ setTicketData, setImageFile }) => {
+  const [preview, setPreview] = useState(null);
 
   const handleFileChange = (event) => {
-    const file = event.target.files[0];
-    if (file) {
-      const imageUrl = URL.createObjectURL(file); 
+    const selectedFile = event.target.files[0];
+    if (selectedFile) {
+      const imageUrl = URL.createObjectURL(selectedFile);
       setPreview(imageUrl);
+      
+      // Энд нэмэх:
+      setImageFile(selectedFile); // Дээд component руу file-аа өгч байна
     }
   };
 
@@ -20,13 +23,13 @@ const TicketPhoto = () => {
         id="file"
         accept="image/*"
         style={{ display: 'none' }}
-        onChange={handleFileChange} 
+        onChange={handleFileChange}
       />
       <a
         href="#"
         className={styles.uploadLink}
         onClick={(e) => {
-          e.preventDefault(); 
+          e.preventDefault();
           document.getElementById('file').click();
         }}
       >
@@ -34,7 +37,13 @@ const TicketPhoto = () => {
       </a>
       {preview && (
         <div className={styles.preview}>
-          <Image src={preview} alt="Тасалбарын зураг" style={{ maxWidth: '200px', marginTop: '10px' }} />
+          <Image
+            src={preview}
+            alt="Тасалбарын зураг"
+            width={200}
+            height={200}
+            style={{ objectFit: 'cover', marginTop: '10px' }}
+          />
         </div>
       )}
     </div>

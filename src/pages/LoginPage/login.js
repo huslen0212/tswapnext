@@ -2,6 +2,7 @@ import { useState } from 'react';
 import Image from 'next/image';
 import styles from '../LoginPage/LoginPage.module.css';
 import Link from 'next/link';
+import { signIn } from 'next-auth/react'; // Import signIn from NextAuth
 
 export default function Login() {
   const [username, setUsername] = useState('');
@@ -15,22 +16,18 @@ export default function Login() {
     setError('');
 
     // Send a POST request to the backend API
-    const response = await fetch('/api/auth/login', {
-      method: 'POST',
-      headers: {
-        'Content-Type': 'application/json',
-      },
-      body: JSON.stringify({ username, password }),
+    const res = await signIn('credentials', {
+      redirect: false,
+      username,
+      password,
     });
 
-    const data = await response.json();
-
-    if (response.ok) {
+    if (res.ok) {
       // Redirect user or show success message
       window.location.href = '/'; // Update the URL for your app
     } else {
       // Show error message
-      setError(data.error || 'Нэвтрэх нэр эсвэл нууц үг буруу байна');
+      setError(res.error || 'Нэвтрэх нэр эсвэл нууц үг буруу байна');
     }
   };
 
@@ -73,10 +70,3 @@ export default function Login() {
     </div>
   );
 }
-
-//schema model table teige adilhan bolgono ticket order
-//npm prisma studio
-
-//api route dotro huseltuude bicne fronttoigo holbono 
-
-//nevtrsn bol user ee sessiond hadgaldg ym hiine

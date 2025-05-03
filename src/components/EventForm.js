@@ -1,44 +1,37 @@
-'use client'; 
+'use client';
 
-import { useState } from 'react';
 import styles from '../styles/EventForm.module.css';
 
-export default function EventForm(props) {
-  const [formData, setFormData] = useState({
-    location: '',
-    date: '',
-    type: '',
-    price: '',
-  });
-
-  const handleChange = (e) => {
-    const { name, value } = e.target;
-    setFormData((prev) => ({
-      ...prev,
-      [name]: value,
-    }));
-  };
-
-  const handleSubmit = (e) => {
-    e.preventDefault();
-    console.log('Илгээгдсэн өгөгдөл:', formData);
-  };
-
+export default function EventForm({ color, handleInputChange, ticketData }) {
   return (
-    <div className={styles.container}
-         style={{ color: props.color }}>
-      <form onSubmit={handleSubmit}>
+    <div className={styles.container} style={{ color }}>
+      <form>
         <div className={styles.field}>
-          <label htmlFor="location" className={styles.label}>
+          <label htmlFor="ticket_title" className={styles.label}>
+            Тасалбарын гарчиг:
+          </label>
+          <input
+            type="text"
+            id="ticket_title"
+            name="ticket_title"
+            placeholder="Тасалбарын нэр бичнэ үү..."
+            value={ticketData.ticket_title}
+            onChange={handleInputChange}
+            className={styles.input}
+          />
+        </div>
+
+        <div className={styles.field}>
+          <label htmlFor="place" className={styles.label}>
             Хаана:
           </label>
           <input
             type="text"
-            id="location"
-            name="location"
+            id="place"
+            name="place"
             placeholder="Энд бичнэ үү..."
-            value={formData.location}
-            onChange={handleChange}
+            value={ticketData.place}
+            onChange={handleInputChange}
             className={styles.input}
           />
         </div>
@@ -52,45 +45,45 @@ export default function EventForm(props) {
             id="date"
             name="date"
             placeholder="Энд бичнэ үү..."
-            value={formData.date}
-            onChange={handleChange}
+            value={ticketData.date}
+            onChange={handleInputChange}
             className={styles.input}
           />
         </div>
 
         <div className={styles.field}>
-          <label htmlFor="type" className={styles.label}>
+          <label htmlFor="ticket_category" className={styles.label}>
             Төрөл:
           </label>
           <select
-            id="type"
-            name="type"
-            value={formData.type}
-            onChange={handleChange}
+            id="ticket_category"
+            name="ticket_category"
+            value={ticketData.ticket_category}
+            onChange={handleInputChange}
             className={styles.select}
           >
             <option value="" disabled hidden>
               Төрлөө сонгоно уу
             </option>
-            <option value="concert">Концерт</option>
-            <option value="sports">Спорт</option>
-            <option value="coupon">Купон</option>
-            <option value="event">Эвент</option>
-            <option value="other">Бусад</option>
+            <option value="Концерт">Концерт</option>
+            <option value="Спорт">Спорт</option>
+            <option value="Купон">Купон</option>
+            <option value="Эвент">Эвент</option>
+            <option value="Бусад">Бусад</option>
           </select>
         </div>
 
         <div className={styles.field}>
-          <label htmlFor="price" className={styles.label}>
+          <label htmlFor="ticket_price" className={styles.label}>
             Үнэ:
           </label>
           <input
             type="text"
-            id="price"
-            name="price"
+            id="ticket_price"
+            name="ticket_price"
             placeholder="Энд бичнэ үү..."
-            value={formData.price}
-            onChange={handleChange}
+            value={ticketData.ticket_price}
+            onChange={handleInputChange}
             className={styles.input}
           />
         </div>
