@@ -67,7 +67,7 @@ const Header = () => {
           {/* Conditionally render Logout button and email */}
           {userEmail ? (
             <>
-              <span className={styles.email}>{userEmail}</span>
+              <button className={styles.logoutBtn}><Link href="/EdithPage/Edith" ><span className={styles.email}>{userEmail}</span></Link></button>
               <button className={styles.logoutBtn} onClick={logout}>Гарах</button>
             </>
           ) : (
