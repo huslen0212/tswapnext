@@ -11,7 +11,7 @@ datasource db {
 }
 
 model Users {
-  user_id       Int        @id @default(autoincrement())
+  user_id       Int         @id @default(autoincrement())
   last_name     String? 
   first_name    String? 
   phone_number  String? 
@@ -22,6 +22,7 @@ model Users {
   wallet        Wallet?
   orders        Orders[]
 
+  savedTickets  SavedTickets[]  @relation("UserSavedTickets")
   @@map("users") // Explicitly map to the lowercase 'users' table
 }
 
@@ -42,6 +43,7 @@ model Tickets {
 
   orders          Orders[]
 
+  savedTickets  SavedTickets[]  @relation("TicketSavedTickets")
   @@map("tickets") // Explicitly map to the lowercase 'tickets' table
 }
 
@@ -65,4 +67,14 @@ model Orders {
 
   @@id([ticket_id, user_id])
   @@map("orders") // Explicitly map to the lowercase 'orders' table
+}
+
+model SavedTickets {
+  id          Int      @id @default(autoincrement())
+  user_id     Int
+  ticket_id   Int
+  created_at  DateTime @default(now())
+
+  user        Users    @relation("UserSavedTickets", fields: [user_id], references: [user_id])
+  ticket      Tickets  @relation("TicketSavedTickets", fields: [ticket_id], references: [ticket_id])
 }

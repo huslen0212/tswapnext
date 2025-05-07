@@ -1,36 +1,93 @@
-
 import Footer from '@/components/Footer';
 import Header from '../../components/Header';
 import SavedTicket from '@/components/SavedTicket';
 import styles from '../TicketPage/SavedTicketPage.module.css';
-import { useState } from 'react';
+import { useState, useEffect } from 'react';
+import { useSession } from 'next-auth/react';
+import { useRouter } from 'next/router';
 
 export default function Savedticket() {
-  const [tickets, setTickets] = useState([1, 2, 3,]);
+  const { data: session } = useSession();
+  const [savedTickets, setSavedTickets] = useState([]);
+  const [loading, setLoading] = useState(true);
+  const [error, setError] = useState(null);
+  const router = useRouter();
 
-  const handleDeleteTicket = (id) => {
-    setTickets(tickets.filter(ticket => ticket !== id));
+  useEffect(() => {
+    async function fetchSavedTickets() {
+      try {
+        if (!session) {
+          setError('Хэрэглэгчийн мэдээлэл олдсонгүй.');
+          setLoading(false);
+          return;
+        }
+
+        const res = await fetch(`/api/savedticket`);
+        if (!res.ok) {
+          throw new Error('Тасалбар авахад алдаа гарлаа.');
+        }
+        const data = await res.json();
+        setSavedTickets(data);
+      } catch (err) {
+        console.error(err);
+        setError(err.message);
+      } finally {
+        setLoading(false);
+      }
+    }
+
+    fetchSavedTickets();
+  }, [session]);
+
+  const handleTicketClick = (ticketId) => {
+    router.push(`/TicketPage/ticketInfo/${ticketId}`);
+  };
+
+  const handleDeleteTicket = async (ticketId) => {
+    try {
+      const res = await fetch(`/api/savedticket?ticketId=${ticketId}`, {
+        method: 'DELETE',
+      });
+      if (!res.ok) {
+        throw new Error('Тасалбар устгахад алдаа гарлаа.');
+      }
+
+      // Устгасны дараа state-с устгах
+      setSavedTickets((prev) =>
+        prev.filter((saved) => saved.ticket.ticket_id !== ticketId)
+      );
+    } catch (err) {
+      console.error(err);
+      alert(err.message);
+    }
   };
 
   return (
     <div className="pageContainer">
       <Header />
       <div className="content">
-
         <div className={styles.headingContainer}>
           <h1>Таны хадгалсан тасалбар</h1>
         </div>
 
-        <div className={styles.ticketContainer}> 
-        {tickets.length === 0 ? (
-            <p>Таньд хадгалсан тасалбар байгхүй байна.</p>
+        <div className={styles.ticketContainer}>
+          {loading ? (
+            <p>Уншиж байна...</p>
+          ) : error ? (
+            <p style={{ color: 'red' }}>{error}</p>
+          ) : savedTickets.length === 0 ? (
+            <p>Таньд хадгалсан тасалбар байхгүй байна.</p>
           ) : (
-            tickets.map((ticketId) => (
-              <SavedTicket key={ticketId} ticketId={ticketId} onDelete={handleDeleteTicket} />
+            savedTickets.map((saved) => (
+              <SavedTicket 
+                key={saved.id} 
+                ticket={saved.ticket} 
+                onClick={() => handleTicketClick(saved.ticket.ticket_id)}
+                onDelete={handleDeleteTicket}
+              />
             ))
           )}
         </div>
-        
       </div>
       <Footer />
     </div>

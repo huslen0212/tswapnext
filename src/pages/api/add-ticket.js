@@ -2,7 +2,6 @@ import { getServerSession } from "next-auth/next";
 import { authOptions } from "./auth/[...nextauth]";
 import { prisma } from "../../../lib/prisma";
 import formidable from 'formidable';
-import { promises as fs } from 'fs';
 import path from 'path';
 
 
@@ -74,7 +73,7 @@ export default async function handler(req, res) {
           ticket_price: ticket_price?.[0] ? parseFloat(ticket_price[0]) : 0,
           ticket_image: ticketImagePath,
           ticket_status: 'available',
-          user_id: user.user_id, // Одоохондоо туршилтаар 1 гэж хатуу өгсөн байна.
+          user_id: user.user_id,
         },
       });
 

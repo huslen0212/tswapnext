@@ -63,7 +63,6 @@ export default function AddTicket() {
       console.error('Error submitting ticket:', error);
     }
   };
-  
 
   return (
     <div className="pageContainer">

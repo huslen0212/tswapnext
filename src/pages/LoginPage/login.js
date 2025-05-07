@@ -3,12 +3,13 @@ import Image from 'next/image';
 import styles from '../LoginPage/LoginPage.module.css';
 import Link from 'next/link';
 import { signIn } from 'next-auth/react'; // Import signIn from NextAuth
+import { useRouter } from 'next/navigation';
 
 export default function Login() {
   const [username, setUsername] = useState('');
   const [password, setPassword] = useState('');
   const [error, setError] = useState('');
-
+  const router = useRouter();
   const handleSubmit = async (e) => {
     e.preventDefault();
 
@@ -21,10 +22,11 @@ export default function Login() {
       username,
       password,
     });
+    console.log(res);
 
     if (res.ok) {
       // Redirect user or show success message
-      window.location.href = '/'; // Update the URL for your app
+      router.push("/")
     } else {
       // Show error message
       setError(res.error || 'Нэвтрэх нэр эсвэл нууц үг буруу байна');

@@ -4,24 +4,56 @@ import Footer from '@/components/Footer';
 import Header from '../../components/Header';
 import Image from "next/image";
 import styles from "../TicketPage/TicketInfoPage.module.css";
+import { useSession } from 'next-auth/react';
 
 export default function TicketInfo() {
   const router = useRouter();
   const { id } = router.query;
-
+  const { data: session } = useSession();
   const [ticket, setTicket] = useState(null);
+  const [errorMessage, setErrorMessage] = useState('');
 
   useEffect(() => {
     if (!id) return;
-
     async function fetchTicket() {
       const res = await fetch(`/api/ticket/${id}`);
       const data = await res.json();
       setTicket(data);
     }
-
     fetchTicket();
   }, [id]);
+
+  async function handleSaveTicket() {
+    try {
+      if (!session) {
+        alert('Хэрэглэгч ороогүй байна. Нэвтэрч орно уу.');
+        return;
+      }
+
+      const res = await fetch(`/api/savedticket`, {
+        method: 'POST',
+        headers: {
+          'Content-Type': 'application/json',
+        },
+        body: JSON.stringify({
+          userId: session.user.id,
+          ticketId: ticket.ticket_id,
+        }),
+      });
+
+      const data = await res.json();
+
+      if (!res.ok) {
+        setErrorMessage(data.message || 'Тасалбар хадгалах үед алдаа гарлаа.');
+        return;
+      }
+
+      alert('Тасалбар амжилттай хадгалагдлаа!');
+    } catch (error) {
+      console.error(error);
+      alert('Хадгалах үед алдаа гарлаа.');
+    }
+  }
 
   if (!ticket) {
     return <p>Уншиж байна...</p>;
@@ -47,15 +79,13 @@ export default function TicketInfo() {
               <p>Тасалбарын төрөл: {ticket.ticket_category || "Төрөл тодорхойгүй"}</p>
               <p>Үнэ: {ticket.ticket_price ? `${ticket.ticket_price.toLocaleString()}₮` : "Үнэ тодорхойгүй"}</p>
             </div>
-            <button className={styles.saveButton}>Хадгалах</button>
+            <button className={styles.saveButton} onClick={handleSaveTicket}>Хадгалах</button>
+            {errorMessage && <p style={{color: 'red'}}>{errorMessage}</p>}
             <button className={styles.paymentButton}>Төлбөр төлөх</button> 
           </div>
           <div className={styles.ticketDescription}>
             <label>Тайлбар:</label>
-            <textarea
-              readOnly
-              defaultValue={ticket.description || "Тайлбар байхгүй"}
-            />
+            <textarea readOnly defaultValue={ticket.description || "Тайлбар байхгүй"} />
             <h3>Холбоо барих утас: 9999-9999</h3>
             <h3>Цахим шуудан: example@gmail.com</h3>
             <div className={styles.offerSection}>
@@ -69,11 +99,3 @@ export default function TicketInfo() {
     </div>
   );
 }
-
-//ticket.status === "sold" ? (
-
-//if(ticketstatus==="sold"){
-
-
-
-//if(guilgesn tsag == 30) {ticket.status='available'}
