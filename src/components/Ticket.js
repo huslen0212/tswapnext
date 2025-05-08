@@ -19,6 +19,7 @@ export default function Ticket({ ticket}) {
           <h3>{ticket.ticket_title || "Гарчиг алга"}</h3>
           <p>📅 {ticket.date ? new Date(ticket.date).toISOString().substring(0, 10) : "Огноо алга"}</p>
           <p>📍 {ticket.place || "Байршил тодорхойгүй"}</p>
+          <p>Худалдааны хэлбэр: {ticket.ticket_type || "Төрөл тодорхойгүй"}</p>
         </div>
       </Link>
     </section>

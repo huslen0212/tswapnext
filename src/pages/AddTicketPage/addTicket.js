@@ -11,7 +11,7 @@ export default function AddTicket() {
   const { data: session } = useSession(); // get session
   const [ticketData, setTicketData] = useState({
     ticket_title: '',
-    ticket_type: 'sell',
+    ticket_type: 'Зарах',
     ticket_category: '',
     place: '',
     description: '',

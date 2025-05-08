@@ -19,7 +19,8 @@ export default async function handler(req, res) {
         description: true,
         date: true,
         place: true,
-        ticket_category: true, // энэ мөрийг нэм
+        ticket_category: true,
+        ticket_type: true,
       },
     });
 

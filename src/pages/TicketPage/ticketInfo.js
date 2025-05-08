@@ -104,6 +104,7 @@ export default function TicketInfo() {
               <p>Хэзээ: {ticket.date ? new Date(ticket.date).toISOString().split('T')[0] : "Огноо байхгүй"}</p>
               <p>Тасалбарын төрөл: {ticket.ticket_category || "Төрөл тодорхойгүй"}</p>
               <p>Үнэ: {ticket.ticket_price ? `${ticket.ticket_price.toLocaleString()}₮` : "Үнэ тодорхойгүй"}</p>
+              <p>Худалдаалах хэлбэр: {ticket.ticket_type || "Төрөл тодорхойгүй"}</p>
             </div>
 
             {/* --- Энд хадгалах эсвэл хасах товч харуулна --- */}
