@@ -1,26 +1,14 @@
-// SavedTicket.js
-import { useState } from 'react';
 import Image from 'next/image';
 import styles from '../styles/SavedTicket.module.css';
-import Modal from './modal';  // Make sure this matches the export (default export)
 
 export default function SavedTicket({ ticket, onClick, onDelete }) {
   if (!ticket) return null;
 
-  // eslint-disable-next-line react-hooks/rules-of-hooks
-  const [showModal, setShowModal] = useState(false);
-
-  const handleDelete = () => {
-    setShowModal(true);  // Modal-ийг нээж байна
-  };
-
-  const handleConfirmDelete = () => {
-    onDelete(ticket.ticket_id);
-    setShowModal(false);  // Modal-ийг хаана
-  };
-
-  const handleCloseModal = () => {
-    setShowModal(false);  // Modal-ийг хаана
+  const handleDelete = (e) => {
+    e.stopPropagation();
+    if (confirm("Та энэ тасалбарыг устгахдаа итгэлтэй байна уу?")) {
+      onDelete(ticket.ticket_id);
+    }
   };
 
   return (
@@ -57,13 +45,6 @@ export default function SavedTicket({ ticket, onClick, onDelete }) {
           Хасах
         </button>
       </div>
-
-      {/* Modal-ийг харуулах */}
-      <Modal 
-        show={showModal} 
-        onClose={handleCloseModal} 
-        onConfirm={handleConfirmDelete} 
-      />
     </div>
   );
 }

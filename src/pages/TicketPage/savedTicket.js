@@ -7,7 +7,7 @@ import { useSession } from 'next-auth/react';
 import { useRouter } from 'next/router';
 
 export default function Savedticket() {
-  const { data: session } = useSession();
+  const { data: session, status } = useSession();
   const [savedTickets, setSavedTickets] = useState([]);
   const [loading, setLoading] = useState(true);
   const [error, setError] = useState(null);
@@ -16,7 +16,11 @@ export default function Savedticket() {
   useEffect(() => {
     async function fetchSavedTickets() {
       try {
-        if (!session) {
+        if (status === "loading") {
+          return; 
+        }
+  
+        if (status === "unauthenticated") {
           setError('Хэрэглэгчийн мэдээлэл олдсонгүй.');
           setLoading(false);
           return;
@@ -37,10 +41,10 @@ export default function Savedticket() {
     }
 
     fetchSavedTickets();
-  }, [session]);
+  }, [status]);
 
   const handleTicketClick = (ticketId) => {
-    router.push(`/TicketPage/ticketInfo/${ticketId}`);
+    router.push(`/TicketPage/ticketInfo?id=${ticketId}`);
   };
 
   const handleDeleteTicket = async (ticketId) => {
@@ -51,7 +55,6 @@ export default function Savedticket() {
       if (!res.ok) {
         throw new Error('Тасалбар устгахад алдаа гарлаа.');
       }
-
       // Устгасны дараа state-с устгах
       setSavedTickets((prev) =>
         prev.filter((saved) => saved.ticket.ticket_id !== ticketId)
@@ -71,7 +74,7 @@ export default function Savedticket() {
         </div>
 
         <div className={styles.ticketContainer}>
-          {loading ? (
+          {loading || status ==="loading" ? (
             <p>Уншиж байна...</p>
           ) : error ? (
             <p style={{ color: 'red' }}>{error}</p>
