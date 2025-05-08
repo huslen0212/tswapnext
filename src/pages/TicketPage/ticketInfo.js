@@ -8,17 +8,26 @@ import { useSession } from 'next-auth/react';
 
 export default function TicketInfo() {
   const router = useRouter();
-  const { id } = router.query;
+  const { id, fromSaved } = router.query;
   const { data: session } = useSession();
   const [ticket, setTicket] = useState(null);
   const [errorMessage, setErrorMessage] = useState('');
+  const [isSaved, setIsSaved] = useState(fromSaved === 'true'); // State to track if ticket is saved
 
   useEffect(() => {
     if (!id) return;
     async function fetchTicket() {
-      const res = await fetch(`/api/ticket/${id}`);
-      const data = await res.json();
-      setTicket(data);
+      try {
+        const res = await fetch(`/api/ticket/${id}`);
+        if (!res.ok) {
+          throw new Error('Тасалбарын мэдээлэл авахад алдаа гарлаа.');
+        }
+        const data = await res.json();
+        setTicket(data);
+      } catch (error) {
+        console.error(error);
+        setErrorMessage('Тасалбарын мэдээлэл авахад алдаа гарлаа.');
+      }
     }
     fetchTicket();
   }, [id]);
@@ -48,10 +57,27 @@ export default function TicketInfo() {
         return;
       }
 
+      setIsSaved(true); // Mark ticket as saved
       alert('Тасалбар амжилттай хадгалагдлаа!');
     } catch (error) {
       console.error(error);
       alert('Хадгалах үед алдаа гарлаа.');
+    }
+  }
+
+  async function handleDeleteSavedTicket() {
+    try {
+      const res = await fetch(`/api/savedticket?ticketId=${ticket.ticket_id}`, {
+        method: 'DELETE',
+      });
+      if (!res.ok) {
+        throw new Error('Хадгалсан тасалбар устгахад алдаа гарлаа.');
+      }
+      setIsSaved(false); // Mark ticket as not saved
+      alert('Амжилттай устгагдлаа!'); // устгасны дараа хадгалсан тасалбарууд руу буцаана
+    } catch (error) {
+      console.error(error);
+      alert('Устгах үед алдаа гарлаа.');
     }
   }
 
@@ -79,10 +105,23 @@ export default function TicketInfo() {
               <p>Тасалбарын төрөл: {ticket.ticket_category || "Төрөл тодорхойгүй"}</p>
               <p>Үнэ: {ticket.ticket_price ? `${ticket.ticket_price.toLocaleString()}₮` : "Үнэ тодорхойгүй"}</p>
             </div>
-            <button className={styles.saveButton} onClick={handleSaveTicket}>Хадгалах</button>
-            {errorMessage && <p style={{color: 'red'}}>{errorMessage}</p>}
-            <button className={styles.paymentButton}>Төлбөр төлөх</button> 
+
+            {/* --- Энд хадгалах эсвэл хасах товч харуулна --- */}
+            {isSaved ? (
+              <button className={styles.deleteButton} onClick={handleDeleteSavedTicket}>
+                Хасах
+              </button>
+            ) : (
+              <button className={styles.saveButton} onClick={handleSaveTicket}>
+                Хадгалах
+              </button>
+            )}
+            {errorMessage && <p style={{ color: 'red' }}>{errorMessage}</p>}
+            {/* --- --- */}
+
+            <button className={styles.paymentButton}>Төлбөр төлөх</button>
           </div>
+
           <div className={styles.ticketDescription}>
             <label>Тайлбар:</label>
             <textarea readOnly defaultValue={ticket.description || "Тайлбар байхгүй"} />

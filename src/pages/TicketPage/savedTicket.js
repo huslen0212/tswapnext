@@ -44,7 +44,7 @@ export default function Savedticket() {
   }, [status]);
 
   const handleTicketClick = (ticketId) => {
-    router.push(`/TicketPage/ticketInfo?id=${ticketId}`);
+  router.push(`/TicketPage/ticketInfo?id=${ticketId}&fromSaved=true`);
   };
 
   const handleDeleteTicket = async (ticketId) => {
