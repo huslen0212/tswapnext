@@ -5,7 +5,7 @@ const Footer = () => {
   return (
     <footer className={styles.footer}>
       <p><b>T Swap</b> - Тасалбараа зарах төгс шийдлийг T Swap платформоос</p>
-      <p>Холбогдох утас: 9999-9999 | Цахим шуудан: example@gmail.com</p>
+      <p>Холбогдох утас: 9496-5023 | Цахим шуудан: tswap@gmail.com</p>
     </footer>
   );
 };
