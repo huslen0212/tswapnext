@@ -12,7 +12,7 @@ export default function TicketInfo() {
   const { data: session } = useSession();
   const [ticket, setTicket] = useState(null);
   const [errorMessage, setErrorMessage] = useState('');
-  const [isSaved, setIsSaved] = useState(fromSaved === 'true'); // State to track if ticket is saved
+  const [isSaved, setIsSaved] = useState(fromSaved === 'true');
 
   useEffect(() => {
     if (!id) return;
@@ -57,7 +57,7 @@ export default function TicketInfo() {
         return;
       }
 
-      setIsSaved(true); // Mark ticket as saved
+      setIsSaved(true);
       alert('Тасалбар амжилттай хадгалагдлаа!');
     } catch (error) {
       console.error(error);
@@ -73,8 +73,8 @@ export default function TicketInfo() {
       if (!res.ok) {
         throw new Error('Хадгалсан тасалбар устгахад алдаа гарлаа.');
       }
-      setIsSaved(false); // Mark ticket as not saved
-      alert('Амжилттай устгагдлаа!'); // устгасны дараа хадгалсан тасалбарууд руу буцаана
+      setIsSaved(false);
+      alert('Хадгалсан тасалбар амжилттай хасагдлаа!');
     } catch (error) {
       console.error(error);
       alert('Устгах үед алдаа гарлаа.');
@@ -107,7 +107,6 @@ export default function TicketInfo() {
               <p>Худалдаалах хэлбэр: {ticket.ticket_type || "Төрөл тодорхойгүй"}</p>
             </div>
 
-            {/* --- Энд хадгалах эсвэл хасах товч харуулна --- */}
             {isSaved ? (
               <button className={styles.deleteButton} onClick={handleDeleteSavedTicket}>
                 Хасах
@@ -118,7 +117,6 @@ export default function TicketInfo() {
               </button>
             )}
             {errorMessage && <p style={{ color: 'red' }}>{errorMessage}</p>}
-            {/* --- --- */}
 
             <button className={styles.paymentButton}>Төлбөр төлөх</button>
           </div>

@@ -31,7 +31,7 @@ export default function Register() {
     const data = await res.json();
     if (res.ok) {
       alert('Бүртгэл амжилттай!');
-      router.push('/LoginPage/login'); // Redirect to login page
+      router.push('/LoginPage/login');
     } else {
       alert(data.error || 'Бүртгэл амжилтгүй!');
     }

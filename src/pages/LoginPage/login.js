@@ -2,7 +2,7 @@ import { useState } from 'react';
 import Image from 'next/image';
 import styles from '../LoginPage/LoginPage.module.css';
 import Link from 'next/link';
-import { signIn } from 'next-auth/react'; // Import signIn from NextAuth
+import { signIn } from 'next-auth/react';
 import { useRouter } from 'next/navigation';
 
 export default function Login() {
@@ -13,10 +13,8 @@ export default function Login() {
   const handleSubmit = async (e) => {
     e.preventDefault();
 
-    // Clear any previous error
     setError('');
 
-    // Send a POST request to the backend API
     const res = await signIn('credentials', {
       redirect: false,
       username,
@@ -25,10 +23,8 @@ export default function Login() {
     console.log(res);
 
     if (res.ok) {
-      // Redirect user or show success message
       router.push("/")
     } else {
-      // Show error message
       setError(res.error || 'Нэвтрэх нэр эсвэл нууц үг буруу байна');
     }
   };

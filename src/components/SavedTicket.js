@@ -6,9 +6,8 @@ export default function SavedTicket({ ticket, onClick, onDelete }) {
 
   const handleDelete = (e) => {
     e.stopPropagation();
-    if (confirm("Та энэ тасалбарыг устгахдаа итгэлтэй байна уу?")) {
+    alert("Хадгалсан тасалбар амжилттай хасагдлаа!") 
       onDelete(ticket.ticket_id);
-    }
   };
 
   return (
@@ -32,7 +31,7 @@ export default function SavedTicket({ ticket, onClick, onDelete }) {
         <p>Хэзээ: {ticket.date ? new Date(ticket.date).toISOString().split('T')[0] : "Огноо байхгүй"}</p>
         <p>Тасалбарын төрөл: {ticket.ticket_category || "Төрөл тодорхойгүй"}</p>
         <p>Үнэ: {ticket.ticket_price ? `${ticket.ticket_price.toLocaleString()}₮` : "Үнэ тодорхойгүй"}</p>
-        <p>Худалдаалах хэлбэр: {ticket.ticket_type || "Төрөл тодорхойгүй"}</p>
+        <p>Худалдааны хэлбэр: {ticket.ticket_type || "Төрөл тодорхойгүй"}</p>
 
         <div className={styles.ticketDescription}>
           <label>Тайлбар:</label>

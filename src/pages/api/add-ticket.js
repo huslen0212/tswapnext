@@ -7,7 +7,7 @@ import path from 'path';
 
 export const config = {
   api: {
-    bodyParser: false, // Disable default body parser
+    bodyParser: false, 
   },
 };
 

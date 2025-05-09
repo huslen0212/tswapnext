@@ -55,7 +55,6 @@ export default function Savedticket() {
       if (!res.ok) {
         throw new Error('Тасалбар устгахад алдаа гарлаа.');
       }
-      // Устгасны дараа state-с устгах
       setSavedTickets((prev) =>
         prev.filter((saved) => saved.ticket.ticket_id !== ticketId)
       );

@@ -11,8 +11,7 @@ const TicketPhoto = ({ setTicketData, setImageFile }) => {
       const imageUrl = URL.createObjectURL(selectedFile);
       setPreview(imageUrl);
       
-      // Энд нэмэх:
-      setImageFile(selectedFile); // Дээд component руу file-аа өгч байна
+      setImageFile(selectedFile);
     }
   };
 

@@ -24,7 +24,6 @@ export const authOptions = {
           throw new Error('Invalid email or password');
         }
 
-        // If successful, return user object
         return {
           id: user.id,
           name: user.name,
@@ -36,7 +35,7 @@ export const authOptions = {
   session: {
     strategy: "jwt",
   },
-  secret: process.env.NEXTAUTH_SECRET, // Үүнийг .env файлд заавал нэмээрэй
+  secret: process.env.NEXTAUTH_SECRET,
 };
 
 export default function handler(req, res) {

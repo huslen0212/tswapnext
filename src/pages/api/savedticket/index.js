@@ -104,6 +104,6 @@ export default async function handler(req, res) {
       res.status(500).json({ error: "Тасалбар устгахад алдаа гарлаа" });
     }
   } else {
-    res.status(405).end(); // Method Not Allowed
+    res.status(405).end();
   }
 }

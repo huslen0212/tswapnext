@@ -1,6 +1,5 @@
-
-import Image from 'next/image'; // Next.js-ийн Image компонент
-import styles from '../styles/Charger.module.css'; // CSS модуль
+import Image from 'next/image';
+import styles from '../styles/Charger.module.css'; 
 
 const Charger = () => {
   return (

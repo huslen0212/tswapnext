@@ -5,7 +5,7 @@ import EventForm from '@/components/EventForm';
 import DescriptionForm from '@/components/DescriptionForm';
 import styles from '../../styles/addTicket.module.css';
 import { useState } from 'react';
-import { useSession } from "next-auth/react"; // import next-auth session
+import { useSession } from "next-auth/react";
 
 export default function AddTicket() {
   const { data: session } = useSession(); // get session
@@ -71,7 +71,6 @@ export default function AddTicket() {
         <section className={styles.TicketForm}>
           <h1 style={{ color: 'rgb(6, 6, 125)' }}>Хайх тасалбараа нэмнэ үү:</h1>
 
-          {/* here you would pass setTicketData or specific fields */}
           <TicketPhoto setTicketData={setTicketData} setImageFile={setImageFile} />
           <EventForm color="rgb(6, 6, 125)" handleInputChange={handleInputChange} ticketData={ticketData} />
         </section>
