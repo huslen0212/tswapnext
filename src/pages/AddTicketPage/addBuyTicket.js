@@ -69,14 +69,14 @@ export default function AddTicket() {
       <Header />
       <div className={styles.content}>
         <section className={styles.TicketForm}>
-          <h1 style={{ color: 'rgb(6, 6, 125)' }}>Хайх тасалбараа нэмнэ үү:</h1>
+          <h1 style={{ color: 'rgb(255, 112, 34)' }}>Хайх тасалбараа нэмнэ үү:</h1>
 
           <TicketPhoto setTicketData={setTicketData} setImageFile={setImageFile} />
-          <EventForm color="rgb(6, 6, 125)" handleInputChange={handleInputChange} ticketData={ticketData} />
+          <EventForm color="rgb(255, 112, 34)" handleInputChange={handleInputChange} ticketData={ticketData} />
         </section>
 
         <div className={styles.description}>
-          <DescriptionForm color="rgb(6, 6, 125)" handleInputChange={handleInputChange} ticketData={ticketData} />
+          <DescriptionForm color="rgb(255, 112, 34)" handleInputChange={handleInputChange} ticketData={ticketData} />
           <button onClick={handleSubmit} className={styles.submitButton}>
             Тасалбар нэмэх
           </button>

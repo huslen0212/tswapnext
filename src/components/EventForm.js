@@ -7,7 +7,7 @@ export default function EventForm({ color, handleInputChange, ticketData }) {
     <div className={styles.container} style={{ color }}>
       <form>
         <div className={styles.field}>
-          <label htmlFor="ticket_title" className={styles.label}>
+          <label htmlFor="ticket_title" className={styles.label} style={{ color }}>
             Тасалбарын гарчиг:
           </label>
           <input
@@ -22,7 +22,7 @@ export default function EventForm({ color, handleInputChange, ticketData }) {
         </div>
 
         <div className={styles.field}>
-          <label htmlFor="place" className={styles.label}>
+          <label htmlFor="place" className={styles.label} style={{ color }}>
             Хаана:
           </label>
           <input
@@ -37,7 +37,7 @@ export default function EventForm({ color, handleInputChange, ticketData }) {
         </div>
 
         <div className={styles.field}>
-          <label htmlFor="date" className={styles.label}>
+          <label htmlFor="date" className={styles.label} style={{ color }}>
             Хэзээ:
           </label>
           <input
@@ -52,7 +52,7 @@ export default function EventForm({ color, handleInputChange, ticketData }) {
         </div>
 
         <div className={styles.field}>
-          <label htmlFor="ticket_category" className={styles.label}>
+          <label htmlFor="ticket_category" className={styles.label} style={{ color }}>
             Төрөл:
           </label>
           <select
@@ -74,7 +74,7 @@ export default function EventForm({ color, handleInputChange, ticketData }) {
         </div>
 
         <div className={styles.field}>
-          <label htmlFor="ticket_price" className={styles.label}>
+          <label htmlFor="ticket_price" className={styles.label} style={{ color }}>
             Үнэ:
           </label>
           <input
