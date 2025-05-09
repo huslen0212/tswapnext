@@ -4,7 +4,8 @@ let mockUser = {
     firstName: 'Эрдэнэ',
     lastName: 'Бат',
     phone: '99119911',
-    email: 'bat@example.com',
+    address:'Mongolia ',
+    email: 'test@gmail.com',
   };
   
   export default function handler(req, res) {
@@ -14,7 +15,7 @@ let mockUser = {
       const { firstName, lastName, phone, email } = req.body;
   
       // Мэдээллийг шинэчилж байна
-      mockUser = { firstName, lastName, phone, email };
+      mockUser = { firstName, lastName, phone, address, email };
   
       res.status(200).json(mockUser);
     } else {

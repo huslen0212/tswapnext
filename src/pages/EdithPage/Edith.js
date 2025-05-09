@@ -56,6 +56,7 @@ export default function LoginEdithPage() {
             <li className={styles.inputt}>Овог: <input name="lastName" value={form.lastName} onChange={handleChange} /></li>
             <li className={styles.inputt}>Нэр: <input name="firstName" value={form.firstName} onChange={handleChange} /></li>
             <li className={styles.inputt}>Утас: <input name="phone" value={form.phone} onChange={handleChange} /></li>
+            <li className={styles.inputt}>Гэрийн хаяг: <input name="address" value={form.address} onChange={handleChange} /></li>
             <li className={styles.inputt}>Имэйл: <input name="email" value={form.email} onChange={handleChange} /></li>
             <button style={{
              backgroundColor: '#4CAF50',
@@ -74,6 +75,7 @@ export default function LoginEdithPage() {
             <li className={styles.inputt}>Овог: {userData.lastName}</li>
             <li className={styles.inputt}>Нэр: {userData.firstName}</li>
             <li className={styles.inputt}>Утас: {userData.phone}</li>
+            <li className={styles.inputt}>Гэрийн хаяг: {userData.address}</li>
             <li className={styles.inputt}>Имэйл: {userData.email}</li>
             <button style={{
                 backgroundColor: '#201465',
