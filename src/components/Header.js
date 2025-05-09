@@ -43,8 +43,8 @@ const Header = () => {
 
           {userEmail ? (
             <>
-              <span className={styles.email}>{userEmail}</span>
-              <button className={styles.logoutBtn} onClick={logout}>Гарах</button>
+            <button className={styles.logoutBtn}><Link href="/EditPage/edit"><span className={styles.email}>{userEmail}</span></Link></button>
+            <button className={styles.logoutBtn} onClick={logout}>Гарах</button>
             </>
           ) : (
             <Link href="/LoginPage/login">
