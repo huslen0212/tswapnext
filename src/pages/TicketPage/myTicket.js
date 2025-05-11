@@ -16,7 +16,7 @@ export default function MyTicketPage() {
     }
 
     if (status === "unauthenticated") {
-      setErrorMessage('Хэрэглэгчийн мэдээлэл олдсонгүй.');
+      setErrorMessage("Хэрэглэгчийн мэдээлэл олдсонгүй.");
       return;
     }
 
@@ -39,6 +39,11 @@ export default function MyTicketPage() {
     fetchTickets();
   }, [status]);
 
+  // Тасалбар устгасны дараа state-аа шинэчлэх
+  const handleDeleteTicket = (deletedId) => {
+    setTickets((prevTickets) => prevTickets.filter((t) => t.ticket_id !== deletedId));
+  };
+
   return (
     <div className="pageContainer">
       <Header />
@@ -52,7 +57,11 @@ export default function MyTicketPage() {
             <p style={{ color: "red" }}>{errorMessage}</p>
           ) : tickets.length > 0 ? (
             tickets.map((ticket) => (
-              <MyTicket key={ticket.ticket_id} ticket={ticket} />
+              <MyTicket 
+                key={ticket.ticket_id} 
+                ticket={ticket} 
+                onDelete={handleDeleteTicket} // Устгахыг дуудахад хэрэглэх
+              />
             ))
           ) : (
             <p>Таньд нэмсэн тасалбарууд байхгүй.</p>
