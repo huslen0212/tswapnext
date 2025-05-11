@@ -1,34 +1,77 @@
 .Edith {
-    background-color: rgba(27, 22, 108, 0.05);
-    border-radius: 16px;
-    padding: 40px;
-    margin: 30px auto;
-    width: 600px;
-    box-shadow: 0 4px 12px rgba(0, 0, 0, 0.1);
-    display: flex;
-    flex-direction: column;
-    justify-content: space-around;
-    font-family: 'Arial', sans-serif;
-    height: 100%;
-  }
-  .Edith h3{
-    font-size: 25px;
-  }
-  .inputt {
-    list-style: none;
-    padding: 0;
-    display: flex;
-    flex-direction: column;
-    font-size: 20px;
-    color: #201465;
-  }
-  
-  .inputt input {
-    margin-top: 8px;
-    padding: 10px 12px;
-    border-radius: 8px;
-    border: 1px solid #ccc;
-    font-size: 15px;
-    transition: border 0.2s ease;
-  }
- 
+  background-color: rgba(27, 22, 108, 0.05);
+  border-radius: 16px;
+  padding: 40px;
+  margin: 30px auto;
+  width: 600px;
+  box-shadow: 0 4px 12px rgba(0, 0, 0, 0.1);
+  display: flex;
+  flex-direction: column;
+  justify-content: space-around;
+  font-family: 'Arial', sans-serif;
+  height: 100%;
+}
+
+.Edith h3 {
+  font-size: 25px;
+}
+
+.inputt {
+  list-style: none;
+  padding: 0;
+  display: flex;
+  flex-direction: column;
+  font-size: 20px;
+  color: #201465;
+}
+
+.inputt input {
+  margin-top: 8px;
+  padding: 10px 12px;
+  border-radius: 8px;
+  border: 1px solid #ccc;
+  font-size: 15px;
+  transition: border 0.2s ease;
+}
+
+/* Button Group styling for two buttons side by side */
+.buttonGroup {
+  display: flex;
+  justify-content: space-between;
+  margin-top: 20px;
+}
+
+.button, .buttonCancel {
+  flex: 0 0 48%; /* Set buttons to take up ~48% width, leaving a gap */
+  padding: 12px;
+  background-color: #201465;
+  color: white;
+  border-radius: 8px;
+  font-size: 18px;
+  border: none;
+  cursor: pointer;
+  transition: background-color 0.3s ease;
+}
+
+.buttonCancel {
+  background-color: #201465; 
+}
+
+.button:hover {
+  background-color: #0056b3;
+}
+
+.buttonCancel:hover {
+  background-color: #0056b3;
+}
+
+.editbutton {
+  background-color: #201465;
+  color: white;
+  padding: 10px 20px;
+  border: none;
+  border-radius: 8px;
+  font-size: 16px;
+  cursor: pointer;
+  margin-top: 20px;
+}
