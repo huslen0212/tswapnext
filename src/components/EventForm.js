@@ -2,8 +2,6 @@
 
 import styles from '../styles/EventForm.module.css';
 
-
-
 export default function EventForm({ color, handleInputChange, ticketData }) {
   return (
     <div className={styles.container} style={{ color }}>
@@ -43,10 +41,11 @@ export default function EventForm({ color, handleInputChange, ticketData }) {
             Хэзээ:
           </label>
           <input
-            type="date"
+            type="text"
             id="date"
             name="date"
-            value={ticketData.date ? formatDate(ticketData.date) : ""}
+            placeholder="Энд бичнэ үү..."
+            value={ticketData.date}
             onChange={handleInputChange}
             className={styles.input}
           />

@@ -19,23 +19,32 @@ export default function MyTicket({ ticket, onDelete }) {
   };
 
   const handleDelete = async () => {
-    if (confirm("Та энэ тасалбарыг устгахдаа итгэлтэй байна уу?")) {
-      try {
-        const res = await fetch(`/api/delete-ticket`, {
-          method: "DELETE",
-          headers: { "Content-Type": "application/json" },
-          body: JSON.stringify({ ticket_id: ticket.ticket_id }),
-        });
+    if (!confirm("Та энэ тасалбарыг устгахдаа итгэлтэй байна уу?")) {
+      return;
+    }
 
-        if (res.ok) {
+    try {
+      const res = await fetch("/api/my-ticket", {
+        method: "DELETE",
+        headers: {
+          "Content-Type": "application/json",
+        },
+        body: JSON.stringify({ ticketId: ticket.ticket_id }),
+      });
+
+      const data = await res.json();
+
+      if (res.ok) {
+        alert(data.message || "Устгасан.");
+        if (onDelete) {
           onDelete(ticket.ticket_id);
-        } else {
-          alert("Устгах үед алдаа гарлаа.");
         }
-      } catch (error) {
-        console.error(error);
-        alert("Устгах үед алдаа гарлаа.");
+      } else {
+        alert(data.message || "Устгахад алдаа гарлаа.");
       }
+    } catch (error) {
+      console.error("Устгах үед алдаа:", error);
+      alert("Устгахад алдаа гарлаа.");
     }
   };
 
