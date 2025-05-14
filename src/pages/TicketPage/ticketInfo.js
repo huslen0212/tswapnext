@@ -13,9 +13,12 @@ export default function TicketInfo() {
   const [ticket, setTicket] = useState(null);
   const [errorMessage, setErrorMessage] = useState('');
   const [isSaved, setIsSaved] = useState(fromSaved === 'true');
+  const [showPaymentInfo, setShowPaymentInfo] = useState(false);
+  const [ownerInfo, setOwnerInfo] = useState(null);
 
   useEffect(() => {
     if (!id) return;
+
     async function fetchTicket() {
       try {
         const res = await fetch(`/api/ticket/${id}`);
@@ -29,6 +32,7 @@ export default function TicketInfo() {
         setErrorMessage('Тасалбарын мэдээлэл авахад алдаа гарлаа.');
       }
     }
+
     fetchTicket();
   }, [id]);
 
@@ -81,6 +85,26 @@ export default function TicketInfo() {
     }
   }
 
+  async function handlePaymentClick() {
+    if (!ticket?.user_id) {
+      alert('Тасалбарын эзэмшигчийн мэдээлэл алга.');
+      return;
+    }
+
+    try {
+      const res = await fetch(`/api/userinfo/${ticket.user_id}`);
+      if (!res.ok) {
+        throw new Error('Эзэмшигчийн мэдээлэл авахад алдаа гарлаа.');
+      }
+      const data = await res.json();
+      setOwnerInfo(data);
+      setShowPaymentInfo(true);
+    } catch (error) {
+      console.error(error);
+      alert('Эзэмшигчийн мэдээлэл авахад алдаа гарлаа.');
+    }
+  }
+
   if (!ticket) {
     return <p>Уншиж байна...</p>;
   }
@@ -116,16 +140,35 @@ export default function TicketInfo() {
                 Хадгалах
               </button>
             )}
+
             {errorMessage && <p style={{ color: 'red' }}>{errorMessage}</p>}
 
-            <button className={styles.paymentButton}>Төлбөр төлөх</button>
+            <button className={styles.paymentButton} onClick={handlePaymentClick}>
+              Төлбөр төлөх
+            </button>
           </div>
 
           <div className={styles.ticketDescription}>
             <label>Тайлбар:</label>
             <textarea readOnly defaultValue={ticket.description || "Тайлбар байхгүй"} />
-            <h3>Холбоо барих утас: 9999-9999</h3>
-            <h3>Цахим шуудан: example@gmail.com</h3>
+
+            {showPaymentInfo && ownerInfo ? (
+              <div className={styles.paymentInfo}>
+                <h3>Тасалбар эзэмшигчийн мэдээлэл:</h3>
+                <p>Цахим шуудан: {ownerInfo.email}</p>
+                <p>Утас: {ownerInfo.phone_number || 'Байхгүй'}</p>
+                <p style={{ fontWeight: 'bold', marginTop: '10px' }}>
+                  Төлбөр төлсний дараа таны данснаас <span style={{ color: 'red' }}>500₮</span> суутгагдана.
+                </p>
+              </div>
+            ) : (
+              !showPaymentInfo && (
+                <>
+                  {/* Эхэндээ хоосон байна */}
+                </>
+              )
+            )}
+
             <div className={styles.offerSection}>
               <textarea placeholder="Сэтгэгдэл бичнэ үү..." />
               <button className={styles.commentButton}>Илгээх</button>
