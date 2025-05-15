@@ -9,6 +9,7 @@ import CategoryButtons from '../../components/CategoryButtons';
 export default function Home() {
   const [tickets, setTickets] = useState([]);
   const [selectedCategory, setSelectedCategory] = useState('all');
+  const [searchTerm, setSearchTerm] = useState(''); // 🆕 Хайлтын текстийн state
 
   useEffect(() => {
     async function fetchTickets() {
@@ -24,6 +25,11 @@ export default function Home() {
 
     fetchTickets();
   }, [selectedCategory]);
+
+  // 🆕 Хайлтад нийцсэн тасалбаруудыг шүүх
+  const filteredTickets = tickets.filter(ticket =>
+    ticket.ticket_title.toLowerCase().includes(searchTerm.toLowerCase())
+  );
 
   return (
     <div className="pageContainer">
@@ -46,6 +52,8 @@ export default function Home() {
               type="text" 
               placeholder="Хайлт хийнэ үү" 
               className={styles.searchInput}
+              value={searchTerm} // 🆕 input утгаа холбосон
+              onChange={(e) => setSearchTerm(e.target.value)} // 🆕 бичих бүрт хадгалах
             />
           </div>
         </div>
@@ -60,12 +68,12 @@ export default function Home() {
         </div>
 
         <div className={styles.ticketContainer}> 
-          {tickets.length > 0 ? (
-            tickets.map((ticket) => (
+          {filteredTickets.length > 0 ? ( // 🆕 filter-лэгдсэн тасалбаруудыг харуулж байна
+            filteredTickets.map((ticket) => (
               <Ticket key={ticket.ticket_id} ticket={ticket} />
             ))
           ) : (
-            <p>Одоогоор энэ төрлийн тасалбар байхгүй байна.</p>
+            <p>Одоогоор хайлтад тохирсон тасалбар байхгүй байна.</p>
           )}
         </div>
       </div>
