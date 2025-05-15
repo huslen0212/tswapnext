@@ -1,6 +1,3 @@
-// This is your Prisma schema file,
-// learn more about it in the docs: https://pris.ly/d/prisma-schema
-
 generator client {
   provider = "prisma-client-js"
 }
@@ -11,23 +8,23 @@ datasource db {
 }
 
 model Users {
-  user_id       Int         @id @default(autoincrement())
-  last_name     String? 
-  first_name    String? 
-  phone_number  String? 
-  email         String?   @unique
-  home_address  String? 
-  password      String?
-  tickets       Tickets[]
-  wallet        Wallet?
-  orders        Orders[]
+  user_id      Int            @id @default(autoincrement())
+  last_name    String?
+  first_name   String?
+  phone_number String?
+  email        String?        @unique
+  home_address String?
+  password     String?
+  savedTickets SavedTickets[] @relation("UserSavedTickets")
+  orders       Orders[]
+  tickets      Tickets[]
+  wallet       Wallet?
 
-  savedTickets  SavedTickets[]  @relation("UserSavedTickets")
-  @@map("users") // Explicitly map to the lowercase 'users' table
+  @@map("users")
 }
 
 model Tickets {
-  ticket_id       Int        @id @default(autoincrement())
+  ticket_id       Int            @id @default(autoincrement())
   ticket_title    String?
   ticket_type     String?
   ticket_category String?
@@ -37,44 +34,49 @@ model Tickets {
   ticket_price    Decimal?
   ticket_image    String?
   ticket_status   String?
-
   user_id         Int?
-  user            Users?     @relation(fields: [user_id], references: [user_id])
-
+  savedTickets    SavedTickets[] @relation("TicketSavedTickets")
   orders          Orders[]
+  user            Users?         @relation(fields: [user_id], references: [user_id])
 
-  savedTickets  SavedTickets[]  @relation("TicketSavedTickets")
-  @@map("tickets") // Explicitly map to the lowercase 'tickets' table
+  @@map("tickets")
 }
 
 model Wallet {
-  user_id        Int        @id
+  user_id        Int       @id
   recharged_date DateTime?
   wallet_balance Decimal?
+  user           Users     @relation(fields: [user_id], references: [user_id])
 
-  user           Users      @relation(fields: [user_id], references: [user_id])
-
-  @@map("wallet") // Explicitly map to the lowercase 'wallet' table
+  @@map("wallet")
 }
 
 model Orders {
-  ticket_id     Int
-  user_id       Int
-  ordered_date  DateTime?
-
-  user          Users      @relation(fields: [user_id], references: [user_id])
-  ticket        Tickets    @relation(fields: [ticket_id], references: [ticket_id])
+  ticket_id    Int
+  user_id      Int
+  ordered_date DateTime?
+  ticket       Tickets   @relation(fields: [ticket_id], references: [ticket_id])
+  user         Users     @relation(fields: [user_id], references: [user_id])
 
   @@id([ticket_id, user_id])
-  @@map("orders") // Explicitly map to the lowercase 'orders' table
+  @@map("orders")
 }
 
 model SavedTickets {
-  id          Int      @id @default(autoincrement())
-  user_id     Int
-  ticket_id   Int
-  created_at  DateTime @default(now())
+  id         Int      @id @default(autoincrement())
+  user_id    Int
+  ticket_id  Int
+  created_at DateTime @default(now())
+  ticket     Tickets  @relation("TicketSavedTickets", fields: [ticket_id], references: [ticket_id])
+  user       Users    @relation("UserSavedTickets", fields: [user_id], references: [user_id])
+}
 
-  user        Users    @relation("UserSavedTickets", fields: [user_id], references: [user_id])
-  ticket      Tickets  @relation("TicketSavedTickets", fields: [ticket_id], references: [ticket_id])
+model News {
+  id        Int      @id @default(autoincrement())
+  title     String
+  summary   String
+  content   String
+  imageUrl  String?
+  author    String?
+  createdAt DateTime @default(now())
 }
