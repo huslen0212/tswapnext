@@ -34,6 +34,18 @@ export default function TicketInfo() {
     }
 
     fetchTicket();
+
+    const cached = localStorage.getItem(`ownerInfo-${id}`);
+    if (cached) {
+      const parsed = JSON.parse(cached);
+      const now = new Date().getTime();
+      if (now - parsed.timestamp < 30 * 60 * 1000) { // 30 minutes
+        setOwnerInfo(parsed.data);
+        setShowPaymentInfo(true);
+      } else {
+        localStorage.removeItem(`ownerInfo-${id}`);
+      }
+    }
   }, [id]);
 
   async function handleSaveTicket() {
@@ -91,17 +103,36 @@ export default function TicketInfo() {
       return;
     }
 
+    const confirmed = confirm('Төлбөр төлсний дараа таны данснаас 500₮ суутгагдана. Та зөвшөөрч байна уу?');
+    if (!confirmed) return;
+
     try {
-      const res = await fetch(`/api/userinfo/${ticket.user_id}`);
-      if (!res.ok) {
-        throw new Error('Эзэмшигчийн мэдээлэл авахад алдаа гарлаа.');
+      const payRes = await fetch('/api/payment', { method: 'POST' });
+      const payData = await payRes.json();
+
+      if (!payRes.ok) {
+        alert(payData.message || 'Төлбөрийн үед алдаа гарлаа.');
+        return;
       }
-      const data = await res.json();
-      setOwnerInfo(data);
+
+      if (typeof window !== 'undefined') {
+        window.dispatchEvent(new Event("balanceUpdated"));
+      }
+
+      const ownerRes = await fetch(`/api/userinfo/${ticket.user_id}`);
+      if (!ownerRes.ok) throw new Error('Эзэмшигчийн мэдээлэл авахад алдаа гарлаа.');
+
+      const ownerData = await ownerRes.json();
+      setOwnerInfo(ownerData);
       setShowPaymentInfo(true);
+
+      localStorage.setItem(`ownerInfo-${ticket.ticket_id}`, JSON.stringify({
+        data: ownerData,
+        timestamp: new Date().getTime()
+      }));
     } catch (error) {
       console.error(error);
-      alert('Эзэмшигчийн мэдээлэл авахад алдаа гарлаа.');
+      alert('Алдаа гарлаа.');
     }
   }
 
@@ -152,21 +183,12 @@ export default function TicketInfo() {
             <label>Тайлбар:</label>
             <textarea readOnly defaultValue={ticket.description || "Тайлбар байхгүй"} />
 
-            {showPaymentInfo && ownerInfo ? (
+            {showPaymentInfo && ownerInfo && (
               <div className={styles.paymentInfo}>
                 <h3>Тасалбар эзэмшигчийн мэдээлэл:</h3>
                 <p>Цахим шуудан: {ownerInfo.email}</p>
                 <p>Утас: {ownerInfo.phone_number || 'Байхгүй'}</p>
-                <p style={{ fontWeight: 'bold', marginTop: '10px' }}>
-                  Төлбөр төлсний дараа таны данснаас <span style={{ color: 'red' }}>500₮</span> суутгагдана.
-                </p>
               </div>
-            ) : (
-              !showPaymentInfo && (
-                <>
-                  {/* Эхэндээ хоосон байна */}
-                </>
-              )
             )}
 
             <div className={styles.offerSection}>

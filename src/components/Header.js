@@ -7,7 +7,7 @@ import styles from "../styles/Header.module.css";
 const Header = () => {
   const { data: session } = useSession();
   const userEmail = session?.user?.email;
-  const [balance, setBalance] = useState(0.00); // state to store the wallet balance
+  const [balance, setBalance] = useState(0.00);
 
   const logout = async () => {
     await signOut({ callbackUrl: '/HomePage' });
@@ -26,6 +26,13 @@ const Header = () => {
       };
 
       fetchBalance();
+
+      const onBalanceUpdated = () => fetchBalance();
+      window.addEventListener("balanceUpdated", onBalanceUpdated);
+
+      return () => {
+        window.removeEventListener("balanceUpdated", onBalanceUpdated);
+      };
     }
   }, [userEmail]);
 
@@ -66,7 +73,7 @@ const Header = () => {
             <Link href="/BalancePage/balance">
               <button className={styles.balance}>
                 <Image src="/photos/plus.png" alt="Balance" width={17} height={17} />
-                <b>{balance.toFixed(2)}₮</b> {/* Display the balance */}
+                <b>{balance.toFixed(2)}₮</b> 
               </button>
             </Link>
           )}
