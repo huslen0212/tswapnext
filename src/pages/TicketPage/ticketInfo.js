@@ -39,7 +39,7 @@ export default function TicketInfo() {
     if (cached) {
       const parsed = JSON.parse(cached);
       const now = new Date().getTime();
-      if (now - parsed.timestamp < 30 * 60 * 1000) { // 30 minutes
+      if (now - parsed.timestamp < 30 * 60 * 1000) {
         setOwnerInfo(parsed.data);
         setShowPaymentInfo(true);
       } else {
@@ -190,11 +190,6 @@ export default function TicketInfo() {
                 <p>Утас: {ownerInfo.phone_number || 'Байхгүй'}</p>
               </div>
             )}
-
-            <div className={styles.offerSection}>
-              <textarea placeholder="Сэтгэгдэл бичнэ үү..." />
-              <button className={styles.commentButton}>Илгээх</button>
-            </div>
           </div>
         </section>
       </div>
