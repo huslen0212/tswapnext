@@ -25,16 +25,16 @@ model Users {
 
 model Tickets {
   ticket_id       Int            @id @default(autoincrement())
-  ticket_title    String?
   ticket_type     String?
+  ticket_title    String?
   ticket_category String?
   place           String?
   description     String?
   date            DateTime?
   ticket_price    Decimal?
   ticket_image    String?
-  ticket_status   String?
   user_id         Int?
+  ticket_status   String?
   savedTickets    SavedTickets[] @relation("TicketSavedTickets")
   orders          Orders[]
   user            Users?         @relation(fields: [user_id], references: [user_id])
@@ -43,9 +43,9 @@ model Tickets {
 }
 
 model Wallet {
-  user_id        Int       @id
   recharged_date DateTime?
   wallet_balance Decimal?
+  user_id        Int       @id
   user           Users     @relation(fields: [user_id], references: [user_id])
 
   @@map("wallet")
@@ -71,12 +71,12 @@ model SavedTickets {
   user       Users    @relation("UserSavedTickets", fields: [user_id], references: [user_id])
 }
 
-model News {
-  id        Int      @id @default(autoincrement())
-  title     String
-  summary   String
-  content   String
-  imageUrl  String?
-  author    String?
-  createdAt DateTime @default(now())
+model news {
+  id         Int       @id @default(autoincrement())
+  title      String
+  summary    String
+  content    String
+  image_url  String?
+  author     String?
+  created_at DateTime? @default(now()) @db.Timestamp(6)
 }

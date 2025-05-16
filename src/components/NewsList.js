@@ -1,24 +1,27 @@
+'use client';
 import React, { useState, useEffect } from 'react';
-import Link from 'next/link';
+import dynamic from 'next/dynamic';
 import Image from 'next/image';
+import Link from 'next/link';
 import Header from '@/components/Header';
 import Footer from '@/components/Footer';
 import styles from '@/styles/NewsList.module.css';
 
-export default function NewsList() {
+const NewsList = () => {
   const [newsItems, setNewsItems] = useState([]);
   const [loading, setLoading] = useState(true);
   const [error, setError] = useState(null);
+  const [isClient, setIsClient] = useState(false);
 
   useEffect(() => {
+    setIsClient(true);
     async function fetchAllNews() {
       try {
-        const res = await fetch('/api/news');
-        if (!res.ok) {
-          throw new Error('Мэдээний мэдээлэл авахад алдаа гарлаа');
+        const response = await fetch('/api/news');
+        if (!response.ok) {
+          throw new Error("Мэдээний мэдээлэл авахад алдаа гарлаа");
         }
-        const data = await res.json();
-        console.log('API-ийн хариу:', data);
+        const data = await response.json();
         setNewsItems(data);
         setLoading(false);
       } catch (err) {
@@ -89,7 +92,9 @@ export default function NewsList() {
                   />
                 </div>
                 <h2 className={styles.newsTitle}>{news.title}</h2>
-                <p className={styles.newsDate}>{formatDate(news.created_at)}</p>
+                <p className={styles.newsDate}>
+                  {isClient ? formatDate(news.created_at) : news.created_at}
+                </p>
                 <p className={styles.newsAuthor}>Зохиогч: {news.author}</p>
                 <p className={styles.newsSummary}>{news.summary}</p>
               </Link>
@@ -99,4 +104,6 @@ export default function NewsList() {
       <Footer />
     </div>
   );
-}
+};
+
+export default dynamic(() => Promise.resolve(NewsList), { ssr: false });

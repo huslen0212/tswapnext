@@ -45,7 +45,7 @@ export default function NewsPage({ newsItem, error }) {
   );
 }
 
-export async function getServerSideProps({ params }) {
+export async function getServerSideProps({ params, req }) {
   const { id } = params;
 
   if (!id || isNaN(parseInt(id))) {
@@ -57,11 +57,14 @@ export async function getServerSideProps({ params }) {
   }
 
   try {
-    console.log('ID-аар мэдээ татаж байна:', id);
-    const res = await fetch(`http://localhost:3000/api/news/${id}`);
+    const protocol = req.headers['x-forwarded-proto'] || 'http';
+    const host = req.headers.host;
+    const baseUrl = `${protocol}://${host}`;
+
+    const res = await fetch(`${baseUrl}/api/news/${id}`);
+
     if (!res.ok) {
       const errorData = await res.json();
-      console.log('API-ийн алдаа:', errorData);
       if (res.status === 404) {
         return { notFound: true };
       }
@@ -71,8 +74,8 @@ export async function getServerSideProps({ params }) {
         },
       };
     }
+
     const newsItem = await res.json();
-    console.log('Татагдсан мэдээ:', newsItem);
 
     return {
       props: {
@@ -80,7 +83,6 @@ export async function getServerSideProps({ params }) {
       },
     };
   } catch (err) {
-    console.error('Мэдээ татахад алдаа:', err);
     return {
       props: {
         error: `Мэдээллийг авахад алдаа гарлаа: ${err.message}`,
@@ -88,3 +90,4 @@ export async function getServerSideProps({ params }) {
     };
   }
 }
+  

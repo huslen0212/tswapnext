@@ -8,46 +8,23 @@ export default async function handler(req, res) {
   } = req;
 
   if (method !== 'GET') {
-    return res.status(405).json({ error: 'Зөвшөөрөгдөөгүй метод' });
-  }
-
-  if (!id || isNaN(parseInt(id))) {
-    return res.status(400).json({ error: 'ID буруу эсвэл алга байна' });
+    return res.status(405).json({ error: 'Зөвхөн GET хүсэлт зөвшөөрөгдөнө' });
   }
 
   try {
-    const news = await prisma.news.findUnique({
-      where: { id: parseInt(id) },
-      select: {
-        id: true,
-        title: true,
-        summary: true,
-        content: true,
-        imageUrl: true,
-        author: true,
-        createdAt: true,
+    const newsItem = await prisma.news.findUnique({
+      where: {
+        id: parseInt(id),
       },
     });
 
-    if (!news) {
-      return res.status(404).json({ error: `Мэдээний мэдээлэл олдсонгүй (ID: ${id})` });
+    if (!newsItem) {
+      return res.status(404).json({ error: 'Мэдээ олдсонгүй' });
     }
 
-    const formattedNews = {
-      id: news.id.toString(),
-      title: news.title,
-      summary: news.summary,
-      content: news.content,
-      image_url: news.imageUrl,
-      author: news.author || 'Нэргүй',
-      created_at: news.createdAt,
-    };
-
-    res.status(200).json(formattedNews);
+    res.status(200).json(newsItem);
   } catch (error) {
-    console.error('Мэдээ татахад алдаа:', error);
-    res.status(500).json({ error: 'Серверийн алдаа: Мэдээллийг авахад алдаа гарлаа' });
-  } finally {
-    await prisma.$disconnect();
+    console.error('Серверийн алдаа:', error);
+    res.status(500).json({ error: 'Серверийн алдаа' });
   }
 }
