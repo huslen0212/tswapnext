@@ -1,0 +1,91 @@
+.container {
+    max-width: 500px;
+    margin-bottom: 10px;
+  }
+  
+  .label {
+    display: block;
+    font-weight: bold;
+    color:#202279;
+    margin-bottom: 5px;
+    font-size: 16px;
+  }
+  
+  .typeLabel {
+    display: inline-block;
+    width: 100px;
+    font-weight: bold;
+    color: #202279;
+    margin-bottom: 5px;
+    font-size: 16px;
+  }
+  
+  .input, .select,
+  .typeSelect {
+    width: 500px;
+    padding: 12px;
+    border: none;
+    background-color: #d9d9d9;
+    border-radius: 10px;
+    font-size: 16px;
+    color: #333;
+    outline: none;
+  }
+  .inputSummary{
+    width: 500px;
+    height: 100px;
+    padding: 12px;
+    border: none;
+    background-color: #d9d9d9;
+    border-radius: 10px;
+    font-size: 16px;
+    color: #333;
+    outline: none;
+  }
+   .inputContent{
+    width: 500px;
+    height: 300px;
+    padding: 12px;
+    border: none;
+    background-color: #d9d9d9;
+    border-radius: 10px;
+    font-size: 16px;
+    color: #333;
+    outline: none;
+  }
+  
+  .fileInput {
+    display: none;
+  }
+  
+  .input::placeholder {
+    color: #888;
+  }
+  .NewsForm {
+  display: flex;
+  flex-direction: column;
+  align-items: center;       
+  justify-content: center;   
+  padding: 10px;
+}
+  .garchig{
+    color: #202279;
+  }
+   .submitButton {
+    width: 500px;
+    margin-top: 20px;
+    background-color:#202279;
+    color: white;
+    padding: 10px 20px;
+    border: none;
+    border-radius: 5px;
+    font-size: 16px;
+    cursor: pointer;
+    transition: background-color 0.3s ease;
+  }
+  
+  .submitButton:hover {
+    background-color: rgb(10, 10, 150);
+  }
+  
+ 
