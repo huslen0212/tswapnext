@@ -41,10 +41,9 @@ export default function EventForm({ color, handleInputChange, ticketData }) {
             Хэзээ:
           </label>
           <input
-            type="text"
+            type="date"
             id="date"
             name="date"
-            placeholder="Энд бичнэ үү..."
             value={ticketData.date}
             onChange={handleInputChange}
             className={styles.input}

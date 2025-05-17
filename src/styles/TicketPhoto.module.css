@@ -24,3 +24,13 @@
   .preview {
     margin-top: 10px;
   }
+
+.previewContainer {
+  position: relative;
+  width: 500px;
+  height: 200px;
+}
+
+.previewImage {
+  object-fit: cover;
+}

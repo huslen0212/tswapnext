@@ -17,7 +17,7 @@ export default function TicketInfo() {
   const [ownerInfo, setOwnerInfo] = useState(null);
 
   useEffect(() => {
-    if (!id) return;
+    if (!id || !session) return;
 
     async function fetchTicket() {
       try {
@@ -39,19 +39,26 @@ export default function TicketInfo() {
     if (cached) {
       const parsed = JSON.parse(cached);
       const now = new Date().getTime();
-      if (now - parsed.timestamp < 30 * 60 * 1000) {
+      const isValid = now - parsed.timestamp < 30 * 60 * 1000;
+
+      if (isValid && parsed.userEmail === session?.user?.email) {
         setOwnerInfo(parsed.data);
         setShowPaymentInfo(true);
       } else {
         localStorage.removeItem(`ownerInfo-${id}`);
       }
     }
-  }, [id]);
+  }, [id, session]);
 
   async function handleSaveTicket() {
     try {
       if (!session) {
         alert('Хэрэглэгч ороогүй байна. Нэвтэрч орно уу.');
+        return;
+      }
+
+      if (session?.user?.email === ticket?.user?.email) {
+        alert('Та өөрийн оруулсан тасалбараа хадгалаж болохгүй.');
         return;
       }
 
@@ -67,7 +74,6 @@ export default function TicketInfo() {
       });
 
       const data = await res.json();
-
       if (!res.ok) {
         setErrorMessage(data.message || 'Тасалбар хадгалах үед алдаа гарлаа.');
         return;
@@ -103,6 +109,24 @@ export default function TicketInfo() {
       return;
     }
 
+    if (session?.user?.email === ticket?.user?.email) {
+      alert('Та өөрийн оруулсан тасалбар дээр төлбөр төлж болохгүй.');
+      return;
+    }
+
+    const paidKey = `ownerInfo-${ticket.ticket_id}`;
+    const paidCache = localStorage.getItem(paidKey);
+
+    if (paidCache) {
+      const parsed = JSON.parse(paidCache);
+      const now = new Date().getTime();
+      const isValid = now - parsed.timestamp < 30 * 60 * 1000;
+      if (isValid && parsed.userEmail === session?.user?.email) {
+        alert('Та аль хэдийн энэ тасалбар дээр төлбөр төлсөн байна.');
+        return;
+      }
+    }
+
     const confirmed = confirm('Төлбөр төлсний дараа таны данснаас 500₮ суутгагдана. Та зөвшөөрч байна уу?');
     if (!confirmed) return;
 
@@ -126,9 +150,10 @@ export default function TicketInfo() {
       setOwnerInfo(ownerData);
       setShowPaymentInfo(true);
 
-      localStorage.setItem(`ownerInfo-${ticket.ticket_id}`, JSON.stringify({
+      localStorage.setItem(paidKey, JSON.stringify({
         data: ownerData,
-        timestamp: new Date().getTime()
+        timestamp: new Date().getTime(),
+        userEmail: session?.user?.email,
       }));
     } catch (error) {
       console.error(error);

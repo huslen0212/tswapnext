@@ -8,7 +8,7 @@ import { useState } from 'react';
 import { useSession } from "next-auth/react";
 
 export default function AddTicket() {
-  const { data: session } = useSession(); // get session
+  const { data: session } = useSession();
   const [ticketData, setTicketData] = useState({
     ticket_title: '',
     ticket_type: 'Авах',
@@ -20,7 +20,7 @@ export default function AddTicket() {
     ticket_image: '',
   });
 
-  const [imageFile, setImageFile] = useState(null); // for image upload
+  const [imageFile, setImageFile] = useState(null);
 
   const handleInputChange = (e) => {
     const { name, value } = e.target;

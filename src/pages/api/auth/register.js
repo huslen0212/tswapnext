@@ -16,11 +16,23 @@ export default async function handler(req, res) {
           first_name,
           phone_number,
           email,
-          password
+          password,
+          wallet: {
+            create: {
+              wallet_balance: 0, 
+              recharged_date: new Date() 
+            }
+          }
+        },
+        include: {
+          wallet: true
         }
       });
 
-      return res.status(201).json({ message: 'Хэрэглэгч амжилттай бүртгэгдлээ', user: newUser });
+      return res.status(201).json({
+        message: 'Хэрэглэгч амжилттай бүртгэгдлээ',
+        user: newUser
+      });
     } catch (err) {
       console.error(err);
       return res.status(500).json({ error: 'Дотоод алдаа гарлаа' });

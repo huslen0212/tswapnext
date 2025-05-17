@@ -10,7 +10,6 @@ const TicketPhoto = ({ setTicketData, setImageFile }) => {
     if (selectedFile) {
       const imageUrl = URL.createObjectURL(selectedFile);
       setPreview(imageUrl);
-      
       setImageFile(selectedFile);
     }
   };
@@ -24,25 +23,30 @@ const TicketPhoto = ({ setTicketData, setImageFile }) => {
         style={{ display: 'none' }}
         onChange={handleFileChange}
       />
-      <a
-        href="#"
-        className={styles.uploadLink}
-        onClick={(e) => {
-          e.preventDefault();
-          document.getElementById('file').click();
-        }}
-      >
-        Тасалбарын зураг оруулах
-      </a>
+
+      {!preview && (
+        <a
+          href="#"
+          className={styles.uploadLink}
+          onClick={(e) => {
+            e.preventDefault();
+            document.getElementById('file').click();
+          }}
+        >
+          Тасалбарын зураг оруулах
+        </a>
+      )}
+
       {preview && (
         <div className={styles.preview}>
-          <Image
-            src={preview}
-            alt="Тасалбарын зураг"
-            width={200}
-            height={200}
-            style={{ objectFit: 'cover', marginTop: '10px' }}
-          />
+          <div style={{ position: 'relative', width: '500px', height: '200px' }}>
+            <Image
+              src={preview}
+              alt="Тасалбарын зураг"
+              fill
+              style={{ objectFit: 'cover' }}
+            />
+          </div>
         </div>
       )}
     </div>

@@ -64,7 +64,6 @@ export default function AddTicket() {
     }
   };
   
-
   return (
     <div className="pageContainer">
       <Header />
@@ -78,7 +77,7 @@ export default function AddTicket() {
 
         <div className={styles.description}>
           <DescriptionForm color="rgb(6, 6, 125)" handleInputChange={handleInputChange} ticketData={ticketData} />
-          <button onClick={handleSubmit} className={styles.submitButton}>
+          <button style={{backgroundColor: "rgb(6, 6, 125)"}} onClick={handleSubmit} className={styles.submitButton} >
             Тасалбар нэмэх
           </button>
         </div>

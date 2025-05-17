@@ -14,6 +14,13 @@ export default async function handler(req, res) {
   try {
     const ticket = await prisma.tickets.findUnique({
       where: { ticket_id: parseInt(id) },
+      include: {
+        user: {
+          select: {
+            email: true,
+          },
+        },
+      },
     });
 
     if (!ticket) {
@@ -22,7 +29,7 @@ export default async function handler(req, res) {
 
     res.status(200).json(ticket);
   } catch (error) {
-    console.error(error);
+    console.error('API алдаа:', error);
     res.status(500).json({ error: 'Серверийн алдаа' });
   }
 }
