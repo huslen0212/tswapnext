@@ -28,3 +28,20 @@ export default async function handler(req, res) {
     res.status(500).json({ error: 'Серверийн алдаа' });
   }
 }
+import { deleteNewsById } from '@/lib/news'; 
+
+export default async function handler(req, res) {
+  const { id } = req.query;
+
+  if (req.method === 'DELETE') {
+    try {
+      await deleteNewsById(id);
+      res.status(200).json({ message: 'Deleted successfully' });
+    } catch (err) {
+      res.status(500).json({ message: 'Delete failed' });
+    }
+  } else {
+    res.status(405).json({ message: 'Method not allowed' });
+  }
+}
+

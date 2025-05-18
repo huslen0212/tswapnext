@@ -1,7 +1,7 @@
-import AdminHeader from '../components/AdminHeader';
-import Footer from '../components/Footer';
-import NewsPhoto from '../components/NewsPhoto'
-import styles from "../styles/MedeeNemeh.module.css"
+import AdminHeader from '../../components/AdminHeader';
+import Footer from '../../components/Footer';
+import NewsPhoto from '../../components/NewsPhoto'
+import styles from "../MedeeNemeh/MedeeNemeh.module.css"
 export default function MedeeNemeh()
 { return (
     <div className="pageContainer">

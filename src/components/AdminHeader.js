@@ -46,7 +46,7 @@ const Header = () => {
           <nav>
             <ul className={styles.navList}>
               <li>
-                <Link className={styles.navLink} href="/MedeeNemeh">
+                <Link className={styles.navLink} href="/MedeeNemeh/MedeeNemeh">
                   Мэдээлэл нэмэх
                 </Link>
               </li>
