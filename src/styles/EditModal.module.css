@@ -15,7 +15,7 @@
   background: white;
   padding: 25px 30px;
   border-radius: 12px;
-  width: 400px;
+  width: 600px;
   box-shadow: 0 4px 14px rgba(0,0,0,0.25);
   font-family: 'Segoe UI', Tahoma, Geneva, Verdana, sans-serif;
 }
@@ -27,6 +27,7 @@
 }
 
 .formField {
+  width: 575px;
   margin-bottom: 18px;
   display: flex;
   flex-direction: column;
