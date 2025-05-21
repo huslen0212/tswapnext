@@ -1,6 +1,6 @@
 import { useState } from 'react';
 import Image from 'next/image';
-import styles from '../styles/Newsphoto.module.css'
+import styles from '../styles/Newsphoto.module.css';
 
 const NewsPhoto = ({ setImageFile }) => {
   const [preview, setPreview] = useState(null);
@@ -17,12 +17,13 @@ const NewsPhoto = ({ setImageFile }) => {
   return (
     <div className={styles.newsPhoto}>
       <input
-        type="file"
         id="news-file"
+        type="file"
         accept="image/*"
-        style={{ display: 'none' }}
         onChange={handleFileChange}
+        style={{ display: 'none' }}
       />
+
       <a
         href="#"
         className={styles.uploadLink}
@@ -33,6 +34,7 @@ const NewsPhoto = ({ setImageFile }) => {
       >
         Мэдээний зураг оруулах
       </a>
+
       {preview && (
         <div className={styles.preview}>
           <Image

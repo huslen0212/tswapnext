@@ -13,8 +13,8 @@
 }
 
 .newsImage {
-  width: 100%;
-  max-width: 300px;
+  width: 400px ;
+  
   height: auto;
   object-fit: cover;
   border-radius: 8px;

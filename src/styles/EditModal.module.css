@@ -1,0 +1,98 @@
+.modalBackdrop {
+  position: fixed;
+  top: 0;
+  left: 0;
+  width: 100%;
+  height: 100%;
+  background: rgba(0,0,0,0.6);
+  display: flex;
+  justify-content: center;
+  align-items: center;
+  z-index: 1000;
+}
+
+.modalContent {
+  background: white;
+  padding: 25px 30px;
+  border-radius: 12px;
+  width: 400px;
+  box-shadow: 0 4px 14px rgba(0,0,0,0.25);
+  font-family: 'Segoe UI', Tahoma, Geneva, Verdana, sans-serif;
+}
+
+.modalTitle {
+  margin-bottom: 20px;
+  font-weight: 600;
+  color: #222;
+}
+
+.formField {
+  margin-bottom: 18px;
+  display: flex;
+  flex-direction: column;
+}
+
+.formField label {
+  font-weight: 600;
+  margin-bottom: 6px;
+  color: #444;
+}
+
+.formField input,
+.formField textarea {
+  width: 100%;
+  padding: 10px 14px;
+  border: 1.8px solid #ccc;
+  border-radius: 8px;
+  font-size: 1rem;
+  color: #333;
+  font-family: inherit;
+  transition: border-color 0.2s ease, box-shadow 0.2s ease;
+  resize: vertical;
+}
+
+.formField input:focus,
+.formField textarea:focus {
+  outline: none;
+  border-color: #0070f3;
+  box-shadow: 0 0 8px rgba(0, 112, 243, 0.5);
+}
+
+.formField textarea {
+  min-height: 100px;
+}
+
+.actions {
+  display: flex;
+  justify-content: flex-end;
+  gap: 12px;
+  margin-top: 20px;
+}
+
+.actions button {
+  cursor: pointer;
+  padding: 10px 22px;
+  border-radius: 8px;
+  font-weight: 600;
+  border: none;
+  font-size: 1rem;
+  transition: background-color 0.3s ease;
+}
+
+.actions button:first-child {
+  background-color: #0070f3;
+  color: white;
+}
+
+.actions button:first-child:hover {
+  background-color: #005bb5;
+}
+
+.actions button:last-child {
+  background-color: #e0e0e0;
+  color: #333;
+}
+
+.actions button:last-child:hover {
+  background-color: #cacaca;
+}

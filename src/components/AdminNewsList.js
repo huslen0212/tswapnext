@@ -1,44 +1,60 @@
-
 'use client';
 import React, { useState, useEffect } from 'react';
 import Image from 'next/image';
-import Link from 'next/link';
-import styles from '@/styles/NewsList.module.css'; 
+import styles from '@/styles/NewsList.module.css';
+import EditModal from '../components/EditModal';
 
 const AdminNewsList = () => {
   const [newsItems, setNewsItems] = useState([]);
   const [loading, setLoading] = useState(true);
   const [error, setError] = useState(null);
+  const [editingNews, setEditingNews] = useState(null);
 
   useEffect(() => {
-    async function fetchAllNews() {
-      try {
-        const response = await fetch('/api/news');
-        if (!response.ok) throw new Error("Мэдээ авахад алдаа гарлаа");
-        const data = await response.json();
-        setNewsItems(data);
-      } catch (err) {
-        setError('Мэдээ авахад алдаа гарлаа');
-      } finally {
-        setLoading(false);
-      }
-    }
-
-    fetchAllNews();
+    fetchNews();
   }, []);
+
+  const fetchNews = async () => {
+    try {
+      const response = await fetch('/api/news');
+      if (!response.ok) throw new Error('Мэдээ авахад алдаа гарлаа');
+      const data = await response.json();
+      setNewsItems(data);
+    } catch (err) {
+      setError('Мэдээ авахад алдаа гарлаа');
+    } finally {
+      setLoading(false);
+    }
+  };
 
   const handleDelete = async (id) => {
     if (!confirm('Энэ мэдээг устгах уу?')) return;
 
     try {
-      const response = await fetch(`/api/news/${id}`, {
-        method: 'DELETE',
-      });
-
+      const response = await fetch(`/api/news/${id}`, { method: 'DELETE' });
       if (!response.ok) throw new Error('Устгал амжилтгүй боллоо');
       setNewsItems(newsItems.filter((item) => item.id !== id));
     } catch (err) {
       alert('Устгаж чадсангүй');
+    }
+  };
+
+  const handleSave = async (id, updatedData) => {
+    try {
+      const response = await fetch(`/api/news/${id}`, {
+        method: 'PUT',
+        headers: { 'Content-Type': 'application/json' },
+        body: JSON.stringify(updatedData),
+      });
+
+      if (!response.ok) throw new Error('Засвар хадгалахад алдаа гарлаа');
+
+      const updatedNews = await response.json();
+
+      setNewsItems(newsItems.map(item => (item.id === updatedNews.id ? updatedNews : item)));
+      setEditingNews(null);
+    } catch (err) {
+      alert('Засвар хадгалахад алдаа гарлаа');
     }
   };
 
@@ -65,12 +81,24 @@ const AdminNewsList = () => {
             <p>Зохиогч: {news.author}</p>
             <p>{news.summary}</p>
             <div style={{ display: 'flex', gap: '10px', marginTop: '10px' }}>
-              <Link href={`/MedeeNemeh/edit/${news.id}`} className={styles.editBtn}>Засах</Link>
-              <button onClick={() => handleDelete(news.id)} className={styles.deleteBtn}>Устгах</button>
+              <button onClick={() => setEditingNews(news)} className={styles.editBtn}>
+                Засах
+              </button>
+              <button onClick={() => handleDelete(news.id)} className={styles.deleteBtn}>
+                Устгах
+              </button>
             </div>
           </div>
         ))}
       </div>
+      
+      {editingNews && (
+        <EditModal
+          news={editingNews}
+          onClose={() => setEditingNews(null)}
+          onSave={handleSave}
+        />
+      )}
     </div>
   );
 };

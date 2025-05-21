@@ -3,7 +3,6 @@ import CredentialsProvider from "next-auth/providers/credentials";
 import { prisma } from "../../../../lib/prisma";
 import NextAuth from "next-auth";
 
-
 export const authOptions = {
   adapter: PrismaAdapter(prisma),
   providers: [
@@ -34,6 +33,18 @@ export const authOptions = {
   ],
   session: {
     strategy: "jwt",
+  },
+  callbacks: {
+    async jwt({ token, user }) {
+      if (user) {
+        token.isAdmin = user.email === "admin@mail.com";
+      }
+      return token;
+    },
+    async session({ session, token }) {
+      session.user.isAdmin = token.isAdmin;
+      return session;
+    },
   },
   secret: process.env.NEXTAUTH_SECRET,
 };

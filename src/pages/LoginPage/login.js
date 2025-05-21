@@ -10,9 +10,9 @@ export default function Login() {
   const [password, setPassword] = useState('');
   const [error, setError] = useState('');
   const router = useRouter();
+
   const handleSubmit = async (e) => {
     e.preventDefault();
-
     setError('');
 
     const res = await signIn('credentials', {
@@ -20,10 +20,22 @@ export default function Login() {
       username,
       password,
     });
-    console.log(res);
 
     if (res.ok) {
-      router.push("/")
+      try {
+
+        const sessionRes = await fetch("/api/auth/session");
+        const session = await sessionRes.json();
+
+        if (session?.user?.isAdmin) {
+          router.push("/AdminPage/AdminPage");
+        } else {
+          router.push("/");
+        }
+      } catch (err) {
+        console.error('Session шалгах үед алдаа:', err);
+        setError('Системийн алдаа гарлаа.');
+      }
     } else {
       setError(res.error || 'Нэвтрэх нэр эсвэл нууц үг буруу байна');
     }

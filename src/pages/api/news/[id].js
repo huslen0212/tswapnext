@@ -1,5 +1,4 @@
-import { PrismaClient } from '@prisma/client';
-const prisma = new PrismaClient();
+import { prisma } from '../../../../lib/prisma';
 
 export default async function handler(req, res) {
   const {
@@ -7,41 +6,58 @@ export default async function handler(req, res) {
     method,
   } = req;
 
-  if (method !== 'GET') {
-    return res.status(405).json({ error: 'Зөвхөн GET хүсэлт зөвшөөрөгдөнө' });
+  const numericId = parseInt(id);
+
+  if (isNaN(numericId)) {
+    return res.status(400).json({ error: 'ID буруу байна' });
   }
 
-  try {
-    const newsItem = await prisma.news.findUnique({
-      where: {
-        id: parseInt(id),
-      },
-    });
+  switch (method) {
+    case 'GET':
+      try {
+        const newsItem = await prisma.news.findUnique({
+          where: { id: numericId },
+        });
 
-    if (!newsItem) {
-      return res.status(404).json({ error: 'Мэдээ олдсонгүй' });
-    }
+        if (!newsItem) {
+          return res.status(404).json({ error: 'Мэдээ олдсонгүй' });
+        }
 
-    res.status(200).json(newsItem);
-  } catch (error) {
-    console.error('Серверийн алдаа:', error);
-    res.status(500).json({ error: 'Серверийн алдаа' });
+        return res.status(200).json(newsItem);
+      } catch (error) {
+        console.error('GET алдаа:', error);
+        return res.status(500).json({ error: 'Мэдээ авахад алдаа гарлаа' });
+      }
+
+    case 'PUT':
+      try {
+        const { title, summary, content, author } = req.body;
+
+        const updatedNews = await prisma.news.update({
+          where: { id: numericId },
+          data: { title, summary, content, author },
+        });
+
+        return res.status(200).json(updatedNews);
+      } catch (error) {
+        console.error('PUT алдаа:', error);
+        return res.status(500).json({ error: 'Засвар хадгалахад алдаа гарлаа' });
+      }
+
+    case 'DELETE':
+      try {
+        await prisma.news.delete({
+          where: { id: numericId },
+        });
+
+        return res.status(200).json({ message: 'Мэдээ амжилттай устлаа' });
+      } catch (error) {
+        console.error('DELETE алдаа:', error);
+        return res.status(500).json({ error: 'Устгах үед алдаа гарлаа' });
+      }
+
+    default:
+      res.setHeader('Allow', ['GET', 'PUT', 'DELETE']);
+      return res.status(405).json({ error: `Method ${method} зөвшөөрөгдөөгүй` });
   }
 }
-import { deleteNewsById } from '@/lib/news'; 
-
-export default async function handler(req, res) {
-  const { id } = req.query;
-
-  if (req.method === 'DELETE') {
-    try {
-      await deleteNewsById(id);
-      res.status(200).json({ message: 'Deleted successfully' });
-    } catch (err) {
-      res.status(500).json({ message: 'Delete failed' });
-    }
-  } else {
-    res.status(405).json({ message: 'Method not allowed' });
-  }
-}
-

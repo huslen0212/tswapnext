@@ -9,7 +9,3 @@ export default function App({ Component, pageProps }) {
     </SessionProvider>
   );
 }
-
-// export default function App({ Component, pageProps }) {
-//   return <Component {...pageProps} />;
-// }

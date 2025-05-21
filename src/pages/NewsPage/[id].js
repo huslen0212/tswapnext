@@ -1,7 +1,7 @@
 import Header from '@/components/Header';
 import Footer from '@/components/Footer';
 import Image from 'next/image';
-import styles from '@/styles/NewsPage.module.css';
+import styles from '../NewsPage/NewsPage.module.css';
 
 export default function NewsPage({ newsItem, error }) {
   if (error || !newsItem) {
