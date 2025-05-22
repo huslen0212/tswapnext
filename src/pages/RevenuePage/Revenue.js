@@ -36,16 +36,16 @@ export default function RevenuePage() {
           <thead>
             <tr>
               <th>Цахим шуудан</th>
-              <th>Цэнэглэсэн дүн</th>
               <th>Цэнэглэсэн огноо</th>
+              <th>Цэнэглэсэн дүн</th>
             </tr>
           </thead>
           <tbody>
             {topUps.map((item, index) => (
               <tr key={index}>
                 <td>{item.email}</td>
-                <td>{Number(item.amount).toLocaleString()}₮</td>
                 <td>{new Date(item.createdAt).toLocaleString()}</td>
+                 <td>{Number(item.amount).toLocaleString()}₮</td>
               </tr>
             ))}
           </tbody>
