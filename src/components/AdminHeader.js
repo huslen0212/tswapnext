@@ -51,7 +51,9 @@ const Header = () => {
                 </Link>
               </li>
               <li>
-                Нийт орлого: 150000₮
+                <Link className={styles.navLink} href="/RevenuePage/Revenue">
+                  <button className={styles.revenueButton}>Нийт орлого</button>
+                </Link>
               </li>
             </ul>
           </nav>
